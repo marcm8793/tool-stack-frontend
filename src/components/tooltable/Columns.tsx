@@ -1,20 +1,25 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { DevTool } from "@/types";
+import { Category, DevTool } from "@/types";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { Badge } from "../ui/badge";
+import { Link } from "react-router-dom";
+import { DocumentReference } from "firebase/firestore";
 
-export const columns: ColumnDef<DevTool>[] = [
+export const columns = (categories: Category[]): ColumnDef<DevTool>[] => [
   {
     accessorKey: "name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => {
+      const id: string = row.original.id;
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("name")}
-          </span>
+          <Link to={`/tools/${id}`} className="text-blue-500 hover:underline">
+            <span className="max-w-[500px] truncate font-medium">
+              {row.getValue("name")}
+            </span>
+          </Link>
         </div>
       );
     },
@@ -25,10 +30,21 @@ export const columns: ColumnDef<DevTool>[] = [
       <DataTableColumnHeader column={column} title="Category" />
     ),
     cell: ({ row }) => {
+      const categoryRef = row.getValue("category") as DocumentReference;
+      console.log("Category Reference:", categoryRef);
+
+      const categoryId = categoryRef.id;
+      console.log("Category ID:", categoryId);
+
+      const category = categories.find((cat) => cat.id === categoryId);
+      console.log("Found category:", category);
+
+      const categoryName = category ? category.name : "Uncategorized";
+
       return (
         <div className="flex space-x-2">
           <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("category")}
+            {categoryName}
           </span>
         </div>
       );

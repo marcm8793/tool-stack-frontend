@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import DevTools from "./pages/DevTools";
 import ToolDetails from "./pages/ToolDetails";
-import Layout from "./layouts/layout";
+import Layout from "./layouts/Layout";
 
 const AppRoutes = () => {
   return (
@@ -24,7 +24,7 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/tool/:id"
+        path="/tools/:id"
         element={
           <Layout>
             <ToolDetails />{" "}

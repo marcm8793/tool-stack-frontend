@@ -1,21 +1,25 @@
+import { DocumentReference } from "firebase/firestore";
+
 export interface DevTool {
   id: string;
-  name: string;
   badges: string[];
+  category: DocumentReference<Category>;
+  description: string;
   github_link: string;
   github_stars: number;
   logo_url: string;
-}
-
-// TODO: Remove if not needed
-export type DevToolsCollection = DevTool[];
-
-export interface DevToolDocument extends DevTool {
-  id: string;
+  name: string;
+  website_url: string;
 }
 
 export interface DevToolsState {
-  tools: DevToolDocument[];
+  tools: DevTool[];
+  categories: Category[];
   isLoading: boolean;
   error: string | null;
+}
+
+export interface Category {
+  id: string;
+  name: string;
 }
