@@ -14,7 +14,7 @@ export const columns = (categories: Category[]): ColumnDef<DevTool>[] => [
     cell: ({ row }) => {
       const id: string = row.original.id;
       return (
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 ">
           <Link to={`/tools/${id}`} className="text-blue-500 hover:underline">
             <span className="max-w-[500px] truncate font-medium">
               {row.getValue("name")}
@@ -31,14 +31,8 @@ export const columns = (categories: Category[]): ColumnDef<DevTool>[] => [
     ),
     cell: ({ row }) => {
       const categoryRef = row.getValue("category") as DocumentReference;
-      console.log("Category Reference:", categoryRef);
-
       const categoryId = categoryRef.id;
-      console.log("Category ID:", categoryId);
-
       const category = categories.find((cat) => cat.id === categoryId);
-      console.log("Found category:", category);
-
       const categoryName = category ? category.name : "Uncategorized";
 
       return (
@@ -48,6 +42,10 @@ export const columns = (categories: Category[]): ColumnDef<DevTool>[] => [
           </span>
         </div>
       );
+    },
+    filterFn: (row, id, value) => {
+      const categoryRef = row.getValue(id) as DocumentReference;
+      return value.includes(categoryRef.id);
     },
   },
   {

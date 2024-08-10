@@ -1,5 +1,11 @@
+import { ModeToggle } from "./mode-toggle";
+
 const MainNav = () => {
-  return <span></span>;
+  return (
+    <span>
+      <ModeToggle />
+    </span>
+  );
 };
 
 export default MainNav;

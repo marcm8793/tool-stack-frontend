@@ -8,7 +8,7 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link
           to="/"
-          className="text-4xl font-semibold bg-gradient-to-b from-blue-500 to-green-950 text-transparent bg-clip-text"
+          className="text-5xl font-semibold bg-gradient-to-b from-green-200 to-blue-900 text-transparent bg-clip-text"
         >
           ToolStack
         </Link>

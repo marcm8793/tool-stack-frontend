@@ -4,15 +4,24 @@ import { Table } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTableViewOptions } from "./data-table-view-options";
+import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { Category } from "@/types";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
+  categories: Category[];
 }
 
 export function DataTableToolbar<TData>({
   table,
+  categories,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
+
+  const categoryOptions = categories.map((category) => ({
+    label: category.name,
+    value: category.id,
+  }));
 
   return (
     <div className="flex items-center justify-between">
@@ -25,6 +34,13 @@ export function DataTableToolbar<TData>({
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
+        {table.getColumn("category") && (
+          <DataTableFacetedFilter
+            column={table.getColumn("category")}
+            title="Category"
+            options={categoryOptions}
+          />
+        )}
 
         {isFiltered && (
           <Button
