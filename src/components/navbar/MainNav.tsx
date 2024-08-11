@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { auth } from "@/lib/firebase";
 import { User } from "@/types";
+import { UserNav } from "./user-nav";
 
 const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -17,6 +18,9 @@ const Navbar = () => {
           uid: firebaseUser.uid,
           displayName: firebaseUser.displayName,
           photoURL: firebaseUser.photoURL,
+          emailVerified: firebaseUser.emailVerified,
+          isAnonymous: firebaseUser.isAnonymous,
+          phoneNumber: firebaseUser.phoneNumber,
         };
         setUser(user);
       } else {
@@ -38,6 +42,7 @@ const Navbar = () => {
 
   return (
     <div className="flex space-x-2">
+      <UserNav />
       <ModeToggle />
       {user ? (
         <div className="flex items-center space-x-2">
