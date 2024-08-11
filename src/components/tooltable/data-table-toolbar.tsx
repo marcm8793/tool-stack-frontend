@@ -5,22 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTableViewOptions } from "./data-table-view-options";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
-import { Category } from "@/types";
+import { Category, EcoSystem } from "@/types";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   categories: Category[];
+  ecosystems: EcoSystem[];
 }
 
 export function DataTableToolbar<TData>({
   table,
   categories,
+  ecosystems,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
   const categoryOptions = categories.map((category) => ({
     label: category.name,
     value: category.id,
+  }));
+
+  const ecosystemOptions = ecosystems.map((ecosystem) => ({
+    label: ecosystem.name,
+    value: ecosystem.id,
   }));
 
   return (
@@ -39,6 +46,13 @@ export function DataTableToolbar<TData>({
             column={table.getColumn("category")}
             title="Category"
             options={categoryOptions}
+          />
+        )}
+        {table.getColumn("ecosystem") && (
+          <DataTableFacetedFilter
+            column={table.getColumn("ecosystem")}
+            title="Ecosystem"
+            options={ecosystemOptions}
           />
         )}
 

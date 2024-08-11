@@ -1,7 +1,7 @@
 import { columns } from "@/components/tooltable/Columns";
 import { DataTable } from "@/components/tooltable/data-table";
 import { db } from "@/lib/firebase";
-import { Category, DevTool, DevToolsState } from "@/types";
+import { Category, DevTool, DevToolsState, EcoSystem } from "@/types";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
@@ -9,6 +9,7 @@ const DevTools: React.FC = () => {
   const [state, setState] = useState<DevToolsState>({
     tools: [],
     categories: [],
+    ecosystem: [],
     isLoading: true,
     error: null,
   });
@@ -28,10 +29,17 @@ const DevTools: React.FC = () => {
           (doc) => ({ id: doc.id, ...doc.data() } as Category)
         );
 
+        const ecosystemCollection = collection(db, "ecosystems");
+        const ecosystemSnapshot = await getDocs(ecosystemCollection);
+        const ecosystemList = ecosystemSnapshot.docs.map(
+          (doc) => ({ id: doc.id, ...doc.data() } as EcoSystem)
+        );
+
         setState((prevState) => ({
           ...prevState,
           tools: toolsList,
           categories: categoriesList,
+          ecosystem: ecosystemList,
           isLoading: false,
         }));
       } catch (error) {
@@ -50,16 +58,16 @@ const DevTools: React.FC = () => {
   if (state.isLoading) return <div>Loading...</div>;
   if (state.error) return <div>Error: {state.error}</div>;
 
-  const updatedColumns = columns(state.categories);
+  const updatedColumns = columns(state.categories, state.ecosystem);
 
   return (
-    <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
+    <div className="h-full flex-1 flex-col space-y-8 md:p-8">
       <div className="flex items-center justify-between space-y-2">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">
+          <h2 className="text-xl md:text-2xl font-bold tracking-tight">
             Discover the best tools for developers
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground hidden md:flex">
             Find your next package to help you build faster and smarter. Filter
             and click on a tool to learn more!
           </p>
@@ -69,6 +77,7 @@ const DevTools: React.FC = () => {
         data={state.tools}
         columns={updatedColumns}
         categories={state.categories}
+        ecosystems={state.ecosystem}
       />
     </div>
   );

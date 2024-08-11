@@ -5,6 +5,7 @@ export interface DevTool {
   badges: string[];
   category: DocumentReference<Category>;
   description: string;
+  ecosystem: DocumentReference<EcoSystem>;
   github_link: string;
   github_stars: number;
   logo_url: string;
@@ -15,11 +16,17 @@ export interface DevTool {
 export interface DevToolsState {
   tools: DevTool[];
   categories: Category[];
+  ecosystem: EcoSystem[];
   isLoading: boolean;
   error: string | null;
 }
 
 export interface Category {
+  id: string;
+  name: string;
+}
+
+export interface EcoSystem {
   id: string;
   name: string;
 }

@@ -1,11 +1,14 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Category, DevTool } from "@/types";
+import { Category, DevTool, EcoSystem } from "@/types";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { Badge } from "../ui/badge";
 import { Link } from "react-router-dom";
 import { DocumentReference } from "firebase/firestore";
 
-export const columns = (categories: Category[]): ColumnDef<DevTool>[] => [
+export const columns = (
+  categories: Category[],
+  ecosystems: EcoSystem[]
+): ColumnDef<DevTool>[] => [
   {
     accessorKey: "name",
     header: ({ column }) => (
@@ -49,6 +52,30 @@ export const columns = (categories: Category[]): ColumnDef<DevTool>[] => [
     },
   },
   {
+    accessorKey: "ecosystem",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Ecosystem" />
+    ),
+    cell: ({ row }) => {
+      const ecosystemRef = row.getValue("ecosystem") as DocumentReference;
+      const ecosystemId = ecosystemRef.id;
+      const ecosystem = ecosystems.find((eco) => eco.id === ecosystemId);
+      const ecosystemName = ecosystem ? ecosystem.name : "Uncategorized";
+
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-[500px] truncate font-medium">
+            {ecosystemName}
+          </span>
+        </div>
+      );
+    },
+    filterFn: (row, id, value) => {
+      const ecosystemRef = row.getValue(id) as DocumentReference;
+      return value.includes(ecosystemRef.id);
+    },
+  },
+  {
     accessorKey: "badges",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Features" />
@@ -56,7 +83,7 @@ export const columns = (categories: Category[]): ColumnDef<DevTool>[] => [
     cell: ({ row }) => {
       const badges: string[] = row.getValue("badges");
       return (
-        <div className="flex flex-wrap gap-1">
+        <div className="flex space-x-2">
           {badges.map((badge, index) => (
             <Badge key={index} variant="secondary">
               {badge}

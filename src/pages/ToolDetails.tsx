@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { db } from "@/lib/firebase";
-import { DevTool, Category } from "@/types";
+import { DevTool, Category, EcoSystem } from "@/types";
 import { doc, getDoc } from "firebase/firestore";
 import { ArrowLeft, ExternalLink, Github, Star } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -14,11 +14,12 @@ const ToolDetails = () => {
 
   const [tool, setTool] = useState<DevTool | null>(null);
   const [category, setCategory] = useState<string | null>(null);
+  const [ecosystem, setEcosystem] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchToolAndCategory = async () => {
+    const fetchToolCategoryAndEcosystem = async () => {
       try {
         const toolDoc = await getDoc(doc(db, "tools", id!));
         if (toolDoc.exists()) {
@@ -36,6 +37,18 @@ const ToolDetails = () => {
           } else {
             setCategory("Uncategorized");
           }
+
+          // Fetch ecosystem
+          if (toolData.ecosystem) {
+            const ecosystemDoc = await getDoc(toolData.ecosystem);
+            if (ecosystemDoc.exists()) {
+              setEcosystem((ecosystemDoc.data() as EcoSystem).name);
+            } else {
+              setEcosystem("Uncategorized");
+            }
+          } else {
+            setEcosystem("Uncategorized");
+          }
         } else {
           setError("Tool not found");
         }
@@ -47,7 +60,7 @@ const ToolDetails = () => {
       }
     };
 
-    fetchToolAndCategory();
+    fetchToolCategoryAndEcosystem();
   }, [id]);
 
   if (loading) return <div>Loading...</div>;
@@ -55,7 +68,7 @@ const ToolDetails = () => {
   if (!tool) return <div>Tool not found</div>;
 
   return (
-    <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <div className="md:container mx-auto py-10 px-4 sm:px-6 lg:px-8">
       <Button
         onClick={() => navigate("/tools")}
         className="mb-6"
@@ -76,6 +89,7 @@ const ToolDetails = () => {
                 {tool.name}
               </CardTitle>
               <p className="text-muted-foreground">{category}</p>
+              <p className="text-muted-foreground">{ecosystem}</p>
             </div>
           </div>
         </CardHeader>
