@@ -21,6 +21,14 @@ export interface DevToolsState {
   error: string | null;
 }
 
+export interface User {
+  email: string | null;
+  password?: string;
+  uid?: string;
+  displayName?: string | null;
+  photoURL?: string | null;
+}
+
 export interface Category {
   id: string;
   name: string;

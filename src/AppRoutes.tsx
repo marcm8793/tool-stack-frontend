@@ -3,6 +3,8 @@ import HomePage from "./pages/HomePage";
 import DevTools from "./pages/DevTools";
 import ToolDetails from "./pages/ToolDetails";
 import Layout from "./layouts/Layout";
+import { SignInForm } from "./components/auth/Sign-in";
+import { SignUpForm } from "./components/auth/Sign-up";
 
 const AppRoutes = () => {
   return (
@@ -28,6 +30,22 @@ const AppRoutes = () => {
         element={
           <Layout>
             <ToolDetails />{" "}
+          </Layout>
+        }
+      />
+      <Route
+        path="/signin"
+        element={
+          <Layout>
+            <SignInForm />{" "}
+          </Layout>
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <Layout>
+            <SignUpForm />{" "}
           </Layout>
         }
       />

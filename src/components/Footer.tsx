@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Feedback from "./Feedback";
-import { GithubIcon } from "@/assets/GithubIcon";
 import { Link } from "react-router-dom";
+import { Icons } from "@/assets/Icons";
 
 const Footer = () => {
   return (
@@ -27,7 +27,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="flex items-center"
               >
-                <GithubIcon />
+                <Icons.GithubIcon />
               </Link>
             </Button>
           </div>
