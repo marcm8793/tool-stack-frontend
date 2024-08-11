@@ -22,11 +22,14 @@ export interface DevToolsState {
 }
 
 export interface User {
+  uid: string;
   email: string | null;
   password?: string;
-  uid?: string;
-  displayName?: string | null;
-  photoURL?: string | null;
+  emailVerified: boolean;
+  isAnonymous: boolean;
+  displayName: string | null;
+  photoURL: string | null;
+  phoneNumber: string | null;
 }
 
 export interface Category {

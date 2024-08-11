@@ -576,7 +576,7 @@ export const Icons = {
         d="M100.86,421.24s-5.79,143-14.58,192.47A6.1,6.1,0,0,1,85,616.42L79.22,623"
         fill="none"
         stroke="#263238"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         opacity="0.2"
       />
       <path
@@ -611,8 +611,8 @@ export const Icons = {
             y2="159.61"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="429.88"
@@ -621,16 +621,16 @@ export const Icons = {
             y2="159.61"
             fill="none"
             stroke="#002346"
-            stroke-dasharray="0 0 11.88 11.88"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeDasharray="0 0 11.88 11.88"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <polyline
             points="524.94 159.61 530.44 159.61 533.52 155.05"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></polyline>
           <line
             x1="537.05"
@@ -639,16 +639,16 @@ export const Icons = {
             y2="141.97"
             fill="none"
             stroke="#002346"
-            stroke-dasharray="0 0 6.31 6.31"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeDasharray="0 0 6.31 6.31"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <polyline
             points="544.11 139.36 547.19 134.8 552.69 134.8"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></polyline>
           <line
             x1="563.37"
@@ -657,16 +657,16 @@ export const Icons = {
             y2="134.8"
             fill="none"
             stroke="#002346"
-            stroke-dasharray="0 0 10.69 10.69"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeDasharray="0 0 10.69 10.69"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <polyline
             points="734.36 134.8 739.86 134.8 739.86 140.3"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></polyline>
           <line
             x1="739.86"
@@ -675,9 +675,9 @@ export const Icons = {
             y2="250.48"
             fill="none"
             stroke="#002346"
-            stroke-dasharray="0 0 10.49 10.49"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeDasharray="0 0 10.49 10.49"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="739.86"
@@ -686,15 +686,15 @@ export const Icons = {
             y2="261.22"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
         </g>
         <path
           d="M212.91,553.25s-1.22,5.01,1.82,7.55c.91,.76,2.1,1.11,3.28,1.11h307.31c1.91,0,3.71-1.11,4.38-2.89,.5-1.32,.61-3.17-.3-5.73l-316.49-.04Z"
           fill="#e5e6e7"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></path>
         <rect
           x="344.67"
@@ -703,8 +703,8 @@ export const Icons = {
           height="52.09"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></rect>
         <rect
           x="210.38"
@@ -715,7 +715,7 @@ export const Icons = {
           ry="6.73"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="216.9"
@@ -724,8 +724,8 @@ export const Icons = {
           height="188.82"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></rect>
         <rect
           x="220.15"
@@ -734,7 +734,7 @@ export const Icons = {
           height="181.49"
           fill="#002346"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="244.57"
@@ -745,39 +745,39 @@ export const Icons = {
           ry="7.32"
           fill="#e5e6e7"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <path
           d="M526.2,557.85H216.1c-2.37,0-4.02-2.37-3.19-4.59l20.25-54.23c.5-1.33,1.77-2.21,3.19-2.21H506.68c1.44,0,2.72,.9,3.2,2.25l19.52,54.23c.8,2.22-.85,4.56-3.2,4.56Z"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></path>
         <path
           d="M517.16,552.96H224.51c-1.73,0-2.94-1.71-2.36-3.34l16.95-47.89c.35-1,1.3-1.67,2.36-1.67H500.59c1.68,0,3.17,1.04,3.75,2.62l16.58,44.9c.96,2.61-.97,5.39-3.75,5.39Z"
           fill="#e5e6e7"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></path>
         <path
           d="M585.1,532.47c-.2,5.79-3.01,9.24-5.92,11.25-2.66,1.85-5.88,2.73-9.12,2.73h-21.14c-1.37,0-2.73-.15-4.05-.5-7.4-1.99-9.72-7.55-10.25-12.4-.17-1.51-.16-2.95-.09-4.18,.16-2.41,.59-4.07,.59-4.07,4.99-19.24,19.96-21.01,23.6-21.14,.52-.03,.81-.02,.81-.02,.28,0,.55-.02,.81-.02,18.86-.2,23.6,20.36,23.6,20.36,.37,1.27,.64,2.47,.83,3.6,.27,1.6,.37,3.06,.33,4.39Z"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></path>
         <path
           d="M585.1,532.47c-.2,5.79-3.01,9.24-5.92,11.25-2.66,1.85-5.88,2.73-9.12,2.73h-21.14c-1.37,0-2.73-.15-4.05-.5-7.4-1.99-9.72-7.55-10.25-12.4-.17-1.51-.16-2.95-.09-4.18,1.7,3.74,6.05,9.5,16.87,10.58h14.53c2.91,0,5.8-.49,8.5-1.57,3.85-1.55,8.5-4.55,10.36-10.3,.27,1.6,.37,3.06,.33,4.39Z"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></path>
         <path
           d="M585.07,532.55s.03-.01,.03,0c-.22,5.74-3.02,9.16-5.92,11.16-2.66,1.85-5.88,2.73-9.12,2.73h-21.14c-1.37,0-2.73-.15-4.05-.5-7.17-1.93-9.57-7.22-10.19-11.96-.01-.1,.12-.14,.17-.06,2.45,4.18,8.86,11.24,23.89,10.08v-39.86c.52-.03,.81-.02,.81-.02,.28,0,.55-.02,.81-.02v39.79l10.58-.71s9.74-.65,14.14-10.65Z"
           fill="#002346"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></path>
         <rect
           x="703.98"
@@ -786,13 +786,13 @@ export const Icons = {
           height="26.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <polygon
           points="179.05 182.75 191.84 182.45 191.84 143.3 44.18 143.3 44.18 336.89 191.84 336.89 191.84 300.82 179.05 300.51 179.05 182.75"
           fill="#000000"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></polygon>
         <rect
           x="50.44"
@@ -801,8 +801,8 @@ export const Icons = {
           height="4.93"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></rect>
         <rect
           x="50.44"
@@ -811,8 +811,8 @@ export const Icons = {
           height="4.93"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></rect>
         <rect
           x="50.44"
@@ -821,8 +821,8 @@ export const Icons = {
           height="4.93"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></rect>
         <rect
           x="50.44"
@@ -831,8 +831,8 @@ export const Icons = {
           height="4.93"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></rect>
         <rect
           x="50.96"
@@ -841,7 +841,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="50.96"
@@ -850,7 +850,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="50.96"
@@ -859,7 +859,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="50.96"
@@ -868,7 +868,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="144.61"
@@ -877,7 +877,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="50.96"
@@ -886,7 +886,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="50.96"
@@ -895,7 +895,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="50.96"
@@ -904,7 +904,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="50.96"
@@ -913,7 +913,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="50.96"
@@ -922,7 +922,7 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <rect
           x="121.62"
@@ -931,13 +931,13 @@ export const Icons = {
           height="4.93"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></rect>
         <path
           d="M165.8,485.64H67.43c-4.5,0-8.14-3.64-8.14-8.14v-68.35c0-4.5,3.64-8.14,8.14-8.14h98.37c4.5,0,8.14,3.64,8.14,8.14v68.35c0,4.5-3.64,8.14-8.14,8.14Z"
           fill="#e5e6e7"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></path>
         <ellipse
           cx="117.7"
@@ -946,7 +946,7 @@ export const Icons = {
           ry="10.49"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></ellipse>
         <rect
           x="80.99"
@@ -955,8 +955,8 @@ export const Icons = {
           height="6.87"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></rect>
         <rect
           x="80.63"
@@ -965,8 +965,8 @@ export const Icons = {
           height="6.87"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></rect>
         <rect
           x="94.27"
@@ -975,14 +975,14 @@ export const Icons = {
           height="6.87"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></rect>
         <path
           d="M401.38,168.41h-77.71c-2.59,0-4.7-2.1-4.7-4.7v-8.79c0-2.59,2.1-4.7,4.7-4.7h77.71c2.59,0,4.7,2.1,4.7,4.7v8.79c0,2.59-2.1,4.7-4.7,4.7Z"
           fill="#000000"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></path>
         <line
           x1="326.29"
@@ -991,8 +991,8 @@ export const Icons = {
           y2="159.32"
           fill="none"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <circle
           cx="635.75"
@@ -1000,28 +1000,28 @@ export const Icons = {
           r="8.6"
           fill="#76777f"
           stroke="#002346"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         ></circle>
         <path
           d="M233.58,232.62v24.11c0,.44,.36,.8,.8,.8h11.13"
           fill="none"
           stroke="#e5e6e7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></path>
         <path
           d="M241.58,284.62v21.11c0,.44,.36,.8,.8,.8h11.13"
           fill="none"
           stroke="#e5e6e7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></path>
         <path
           d="M241.58,313.48v12.11c0,.44,.36,.8,.8,.8h11.13"
           fill="none"
           stroke="#e5e6e7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></path>
         <line
           x1="248.95"
@@ -1030,8 +1030,8 @@ export const Icons = {
           y2="257.53"
           fill="none"
           stroke="#e5e6e7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="248.95"
@@ -1040,8 +1040,8 @@ export const Icons = {
           y2="264.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="248.95"
@@ -1050,8 +1050,8 @@ export const Icons = {
           y2="271.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="311.95"
@@ -1060,8 +1060,8 @@ export const Icons = {
           y2="264.53"
           fill="none"
           stroke="#f0f1f1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="268.95"
@@ -1070,8 +1070,8 @@ export const Icons = {
           y2="264.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="248.95"
@@ -1080,8 +1080,8 @@ export const Icons = {
           y2="277.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="277.95"
@@ -1090,8 +1090,8 @@ export const Icons = {
           y2="277.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="248.95"
@@ -1100,8 +1100,8 @@ export const Icons = {
           y2="238"
           fill="none"
           stroke="#e5e6e7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="248.95"
@@ -1110,8 +1110,8 @@ export const Icons = {
           y2="245"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="248.95"
@@ -1120,8 +1120,8 @@ export const Icons = {
           y2="251"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="294.95"
@@ -1130,8 +1130,8 @@ export const Icons = {
           y2="245"
           fill="none"
           stroke="#e5e6e7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="281.95"
@@ -1140,8 +1140,8 @@ export const Icons = {
           y2="245"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="283.32"
@@ -1150,8 +1150,8 @@ export const Icons = {
           y2="238"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="256.27"
@@ -1160,8 +1160,8 @@ export const Icons = {
           y2="284.97"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="320.27"
@@ -1170,8 +1170,8 @@ export const Icons = {
           y2="291.97"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="256.27"
@@ -1180,8 +1180,8 @@ export const Icons = {
           y2="291.97"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="256.27"
@@ -1190,8 +1190,8 @@ export const Icons = {
           y2="298.97"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="256.27"
@@ -1200,8 +1200,8 @@ export const Icons = {
           y2="306.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="256.27"
@@ -1210,8 +1210,8 @@ export const Icons = {
           y2="313.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="256.27"
@@ -1220,8 +1220,8 @@ export const Icons = {
           y2="320.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="274.27"
@@ -1230,8 +1230,8 @@ export const Icons = {
           y2="320.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="256.27"
@@ -1240,8 +1240,8 @@ export const Icons = {
           y2="326.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="312.27"
@@ -1250,8 +1250,8 @@ export const Icons = {
           y2="341.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="285.27"
@@ -1260,8 +1260,8 @@ export const Icons = {
           y2="313.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="300.27"
@@ -1270,15 +1270,15 @@ export const Icons = {
           y2="306.53"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <polyline
           points="256.27 341.36 256.27 388.56 268.1 388.56"
           fill="none"
           stroke="#e5e6e7"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></polyline>
         <line
           x1="274.99"
@@ -1287,8 +1287,8 @@ export const Icons = {
           y2="341.36"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="274.99"
@@ -1297,8 +1297,8 @@ export const Icons = {
           y2="365.36"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="274.99"
@@ -1307,8 +1307,8 @@ export const Icons = {
           y2="372.36"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="294.99"
@@ -1317,8 +1317,8 @@ export const Icons = {
           y2="372.36"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="307.99"
@@ -1327,8 +1327,8 @@ export const Icons = {
           y2="365.36"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="274.99"
@@ -1337,8 +1337,8 @@ export const Icons = {
           y2="349.36"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="274.99"
@@ -1347,8 +1347,8 @@ export const Icons = {
           y2="380.36"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="274.99"
@@ -1357,8 +1357,8 @@ export const Icons = {
           y2="388.56"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="287.99"
@@ -1367,8 +1367,8 @@ export const Icons = {
           y2="388.56"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="274.99"
@@ -1377,8 +1377,8 @@ export const Icons = {
           y2="357.36"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="302.99"
@@ -1387,8 +1387,8 @@ export const Icons = {
           y2="349.36"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <g>
           <rect
@@ -1398,7 +1398,7 @@ export const Icons = {
             height="202.52"
             fill="#000000"
             stroke="#002346"
-            stroke-miterlimit="10"
+            strokeMiterlimit="10"
           ></rect>
           <rect
             x="349.26"
@@ -1407,7 +1407,7 @@ export const Icons = {
             height="19"
             fill="#76777f"
             stroke="#002346"
-            stroke-miterlimit="10"
+            strokeMiterlimit="10"
           ></rect>
           <circle
             cx="363.55"
@@ -1415,8 +1415,8 @@ export const Icons = {
             r="4.82"
             fill="#fff"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></circle>
           <circle
             cx="379.29"
@@ -1424,8 +1424,8 @@ export const Icons = {
             r="4.82"
             fill="#fff"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></circle>
           <circle
             cx="395.02"
@@ -1433,15 +1433,15 @@ export const Icons = {
             r="4.82"
             fill="#fff"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></circle>
           <path
             d="M685.53,288.21h-93.39V150.15h93.39v138.06Z"
             fill="#fff"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <g>
             <rect
@@ -1451,8 +1451,8 @@ export const Icons = {
               height="11.17"
               fill="#e5e6e7"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="601.52"
@@ -1461,8 +1461,8 @@ export const Icons = {
               height="11.17"
               fill="#e5e6e7"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="601.52"
@@ -1471,8 +1471,8 @@ export const Icons = {
               height="11.17"
               fill="#e5e6e7"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="601.52"
@@ -1481,8 +1481,8 @@ export const Icons = {
               height="11.17"
               fill="#e5e6e7"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="601.52"
@@ -1491,8 +1491,8 @@ export const Icons = {
               height="11.17"
               fill="#e5e6e7"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="601.52"
@@ -1501,8 +1501,8 @@ export const Icons = {
               height="11.17"
               fill="#e5e6e7"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="601.52"
@@ -1511,8 +1511,8 @@ export const Icons = {
               height="11.17"
               fill="#e5e6e7"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <line
               x1="618.17"
@@ -1521,8 +1521,8 @@ export const Icons = {
               y2="170.2"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="618.17"
@@ -1531,8 +1531,8 @@ export const Icons = {
               y2="185.93"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="618.17"
@@ -1541,8 +1541,8 @@ export const Icons = {
               y2="203.19"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="618.17"
@@ -1551,8 +1551,8 @@ export const Icons = {
               y2="219.43"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="618.17"
@@ -1561,8 +1561,8 @@ export const Icons = {
               y2="234.66"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="618.17"
@@ -1571,8 +1571,8 @@ export const Icons = {
               y2="250.9"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="618.17"
@@ -1581,8 +1581,8 @@ export const Icons = {
               y2="268.16"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
           </g>
           <g>
@@ -1592,7 +1592,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="451.79"
@@ -1600,7 +1600,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1608,7 +1608,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1616,7 +1616,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1624,7 +1624,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1632,7 +1632,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1640,7 +1640,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1648,7 +1648,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1656,7 +1656,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1664,7 +1664,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1672,7 +1672,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1680,7 +1680,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1688,7 +1688,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1696,7 +1696,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1704,7 +1704,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="452.3"
@@ -1712,7 +1712,7 @@ export const Icons = {
               r="3.55"
               fill="#76777f"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
           </g>
           <rect
@@ -1722,8 +1722,8 @@ export const Icons = {
             height="177"
             fill="#fff"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></rect>
           <g>
             <circle
@@ -1732,7 +1732,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="334.99"
@@ -1740,7 +1740,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1748,7 +1748,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1756,7 +1756,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1764,7 +1764,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1772,7 +1772,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1780,7 +1780,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1788,7 +1788,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1796,7 +1796,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1804,7 +1804,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1812,7 +1812,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1820,7 +1820,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1828,7 +1828,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1836,7 +1836,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1844,7 +1844,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <circle
               cx="335.5"
@@ -1852,7 +1852,7 @@ export const Icons = {
               r="3.55"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></circle>
             <line
               x1="346.72"
@@ -1861,8 +1861,8 @@ export const Icons = {
               y2="227.3"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1871,8 +1871,8 @@ export const Icons = {
               y2="243.3"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1881,8 +1881,8 @@ export const Icons = {
               y2="235.3"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1891,8 +1891,8 @@ export const Icons = {
               y2="250.3"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1901,8 +1901,8 @@ export const Icons = {
               y2="259.3"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1911,8 +1911,8 @@ export const Icons = {
               y2="265.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1921,8 +1921,8 @@ export const Icons = {
               y2="272.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1931,8 +1931,8 @@ export const Icons = {
               y2="280.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1941,8 +1941,8 @@ export const Icons = {
               y2="287.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1951,8 +1951,8 @@ export const Icons = {
               y2="294.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1961,8 +1961,8 @@ export const Icons = {
               y2="302.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1971,8 +1971,8 @@ export const Icons = {
               y2="310.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1981,8 +1981,8 @@ export const Icons = {
               y2="318.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -1991,8 +1991,8 @@ export const Icons = {
               y2="325.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -2001,8 +2001,8 @@ export const Icons = {
               y2="333.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -2011,8 +2011,8 @@ export const Icons = {
               y2="342.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -2021,8 +2021,8 @@ export const Icons = {
               y2="353.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -2031,8 +2031,8 @@ export const Icons = {
               y2="363.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -2041,8 +2041,8 @@ export const Icons = {
               y2="371.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -2051,8 +2051,8 @@ export const Icons = {
               y2="377.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
             <line
               x1="346.72"
@@ -2061,8 +2061,8 @@ export const Icons = {
               y2="385.97"
               fill="none"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></line>
           </g>
           <line
@@ -2072,8 +2072,8 @@ export const Icons = {
             y2="216.89"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="479.52"
@@ -2082,8 +2082,8 @@ export const Icons = {
             y2="226.61"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="469.52"
@@ -2092,8 +2092,8 @@ export const Icons = {
             y2="236.32"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="468.52"
@@ -2102,8 +2102,8 @@ export const Icons = {
             y2="246.04"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="468.52"
@@ -2112,8 +2112,8 @@ export const Icons = {
             y2="255.75"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="502.52"
@@ -2122,8 +2122,8 @@ export const Icons = {
             y2="265.46"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="502.52"
@@ -2132,8 +2132,8 @@ export const Icons = {
             y2="275.18"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="502.52"
@@ -2142,8 +2142,8 @@ export const Icons = {
             y2="284.89"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="474.94"
@@ -2152,8 +2152,8 @@ export const Icons = {
             y2="309.22"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="474.94"
@@ -2162,8 +2162,8 @@ export const Icons = {
             y2="328.56"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="474.94"
@@ -2172,8 +2172,8 @@ export const Icons = {
             y2="347.89"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="474.94"
@@ -2182,8 +2182,8 @@ export const Icons = {
             y2="367.22"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
         </g>
         <g>
@@ -2194,13 +2194,13 @@ export const Icons = {
             height="138.59"
             fill="#76777f"
             stroke="#002346"
-            stroke-miterlimit="10"
+            strokeMiterlimit="10"
           ></rect>
           <path
             d="M642.27,372.7c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,8.76c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,9.09c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,10.52c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,9.64c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,10.52c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,9.64c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,9.64c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,9.64c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,8.76c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,8.76c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,8.76c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,8.22c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Zm0,8.11c3.88,0,3.88-6.03,0-6.03s-3.88,6.03,0,6.03h0Z"
             fill="#000000"
             stroke="#002346"
-            stroke-miterlimit="10"
+            strokeMiterlimit="10"
           ></path>
           <g>
             <rect
@@ -2210,8 +2210,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="698.08"
@@ -2220,8 +2220,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="705.74"
@@ -2230,8 +2230,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="713.41"
@@ -2240,8 +2240,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="721.63"
@@ -2250,8 +2250,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="730.4"
@@ -2260,8 +2260,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="738.06"
@@ -2270,8 +2270,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
           </g>
           <g>
@@ -2282,7 +2282,7 @@ export const Icons = {
               height="6.57"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></rect>
             <rect
               x="733.68"
@@ -2291,7 +2291,7 @@ export const Icons = {
               height="6.57"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></rect>
             <rect
               x="741.35"
@@ -2300,7 +2300,7 @@ export const Icons = {
               height="6.57"
               fill="#000000"
               stroke="#002346"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
             ></rect>
             <rect
               x="667.95"
@@ -2309,8 +2309,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="676.16"
@@ -2319,8 +2319,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="684.38"
@@ -2329,8 +2329,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="665.21"
@@ -2339,8 +2339,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="673.97"
@@ -2349,8 +2349,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
             <rect
               x="681.64"
@@ -2359,8 +2359,8 @@ export const Icons = {
               height="6.57"
               fill="#fff"
               stroke="#002346"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></rect>
           </g>
           <line
@@ -2370,8 +2370,8 @@ export const Icons = {
             y2="367.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="680.25"
@@ -2380,8 +2380,8 @@ export const Icons = {
             y2="373.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="656.25"
@@ -2390,8 +2390,8 @@ export const Icons = {
             y2="379.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="683.25"
@@ -2400,8 +2400,8 @@ export const Icons = {
             y2="385.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="659.25"
@@ -2410,8 +2410,8 @@ export const Icons = {
             y2="407.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="672.25"
@@ -2420,8 +2420,8 @@ export const Icons = {
             y2="414.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="662.25"
@@ -2430,8 +2430,8 @@ export const Icons = {
             y2="422.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="661.25"
@@ -2440,8 +2440,8 @@ export const Icons = {
             y2="430.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="659.25"
@@ -2450,8 +2450,8 @@ export const Icons = {
             y2="391.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
           <line
             x1="671.25"
@@ -2460,8 +2460,8 @@ export const Icons = {
             y2="398.16"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></line>
         </g>
         <line
@@ -2471,16 +2471,16 @@ export const Icons = {
           y2="296.52"
           fill="none"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <g>
           <polyline
             points="848.48 320.76 744.36 320.76 730.06 338.12"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></polyline>
           <circle
             cx="730.63"
@@ -2488,7 +2488,7 @@ export const Icons = {
             r="3.65"
             fill="#000000"
             stroke="#002346"
-            stroke-miterlimit="10"
+            strokeMiterlimit="10"
           ></circle>
         </g>
         <g>
@@ -2496,8 +2496,8 @@ export const Icons = {
             points="262.36 120.97 366.48 120.97 380.77 138.33"
             fill="none"
             stroke="#002346"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></polyline>
           <circle
             cx="380.2"
@@ -2505,7 +2505,7 @@ export const Icons = {
             r="3.65"
             fill="#76777f"
             stroke="#002346"
-            stroke-miterlimit="10"
+            strokeMiterlimit="10"
           ></circle>
         </g>
         <line
@@ -2515,8 +2515,8 @@ export const Icons = {
           y2="450.05"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <line
           x1="661.25"
@@ -2525,38 +2525,38 @@ export const Icons = {
           y2="461.49"
           fill="#fff"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></line>
         <polyline
           points="312.27 159.61 203.25 159.61 203.25 311.88 195.41 311.88"
           fill="none"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></polyline>
         <polyline
           points="111.62 395.98 111.62 373.76 122.31 373.76 122.31 342.77"
           fill="none"
           stroke="#002346"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></polyline>
         <polyline
           points="111.62 488.98 111.62 522.45 199.83 522.45"
           fill="none"
           stroke="#002346"
-          stroke-dasharray="0 11"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeDasharray="0 11"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></polyline>
         <polyline
           points="34.43 205.57 17.28 205.57 17.28 448.79 50.44 448.79"
           fill="none"
           stroke="#002346"
-          stroke-dasharray="0 11"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeDasharray="0 11"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></polyline>
       </svg>
     );
