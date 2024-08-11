@@ -71,7 +71,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="w-full space-y-4 overflow-auto">
+    <div className="w-full space-y-4 overflow-auto p-1">
       <DataTableToolbar
         table={table}
         categories={categories}

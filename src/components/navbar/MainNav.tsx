@@ -1,11 +1,13 @@
+import Feedback from "../Feedback";
 import { ModeToggle } from "./mode-toggle";
 
-const MainNav = () => {
+const Navbar = () => {
   return (
-    <span>
+    <div className="flex space-x-2">
+      <Feedback />
       <ModeToggle />
-    </span>
+    </div>
   );
 };
 
-export default MainNav;
+export default Navbar;
