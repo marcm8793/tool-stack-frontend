@@ -25,7 +25,7 @@ const FeatureCard = ({
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-200 dark:from-gray-900 dark:to-indigo-900 flex items-center justify-center p-4 rounded-3xl">
+    <div className="container min-h-screen bg-gradient-to-br from-indigo-100 to-purple-200 dark:from-gray-900 dark:to-indigo-900 flex items-center justify-center p-4 rounded-3xl">
       <div className="w-full max-w-6xl bg-white/30 dark:bg-gray-800/30 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden">
         <div className="container mx-auto px-4 py-16">
           <motion.div

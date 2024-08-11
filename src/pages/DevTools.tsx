@@ -61,7 +61,7 @@ const DevTools: React.FC = () => {
   const updatedColumns = columns(state.categories, state.ecosystem);
 
   return (
-    <div className="h-full flex-1 flex-col space-y-8 md:p-8">
+    <div className="container h-full flex-1 flex-col space-y-8 md:p-8">
       <div className="flex items-center justify-between space-y-2">
         <div>
           <h2 className="text-xl md:text-2xl font-bold tracking-tight">
