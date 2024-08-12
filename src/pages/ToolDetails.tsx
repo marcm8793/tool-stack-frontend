@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { db } from "@/lib/firebase";
-import { DevTool, Category, EcoSystem } from "@/types";
+import { DevTool, Category, EcoSystem } from "@/types/index";
 import { doc, getDoc } from "firebase/firestore";
 import { ArrowLeft, ExternalLink, Github, Star } from "lucide-react";
 import { useEffect, useState } from "react";

@@ -1,10 +1,22 @@
+import { useAuth } from "@/hooks/useAuth";
 import { ModeToggle } from "./Mode-toggle";
+import { UserNav } from "./user-nav";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
 
 const MobileNav = () => {
+  const user = useAuth();
+  const navigate = useNavigate();
+
   return (
-    <span>
+    <div className="flex space-x-2">
       <ModeToggle />
-    </span>
+      {user ? (
+        <UserNav />
+      ) : (
+        <Button onClick={() => navigate("/signin")}>Sign In</Button>
+      )}
+    </div>
   );
 };
 

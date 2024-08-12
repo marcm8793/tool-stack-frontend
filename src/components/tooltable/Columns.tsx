@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Category, DevTool, EcoSystem } from "@/types";
+import { Category, DevTool, EcoSystem } from "@/types/index";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { Badge } from "../ui/badge";
 import { Link } from "react-router-dom";

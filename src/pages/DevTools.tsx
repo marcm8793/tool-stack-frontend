@@ -1,7 +1,7 @@
 import { columns } from "@/components/tooltable/Columns";
 import { DataTable } from "@/components/tooltable/data-table";
 import { db } from "@/lib/firebase";
-import { Category, DevTool, DevToolsState, EcoSystem } from "@/types";
+import { Category, DevTool, DevToolsState, EcoSystem } from "@/types/index";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
