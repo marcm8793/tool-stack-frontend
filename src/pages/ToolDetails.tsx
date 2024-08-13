@@ -1,67 +1,163 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 import { db } from "@/lib/firebase";
-import { DevTool, Category, EcoSystem } from "@/types/index";
-import { doc, getDoc } from "firebase/firestore";
-import { ArrowLeft, ExternalLink, Github, Star } from "lucide-react";
-import { useEffect, useState } from "react";
+import { DevTool, Category, EcoSystem, Like } from "@/types/index";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  deleteDoc,
+  increment,
+  Timestamp,
+} from "firebase/firestore";
+import { ArrowLeft, ExternalLink, Github, Star, Heart } from "lucide-react";
+import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { CommentSection } from "@/components/CommentSection";
 
 const ToolDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { toast } = useToast();
 
   const [tool, setTool] = useState<DevTool | null>(null);
   const [category, setCategory] = useState<string | null>(null);
   const [ecosystem, setEcosystem] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isLiked, setIsLiked] = useState(false);
 
-  useEffect(() => {
-    const fetchToolCategoryAndEcosystem = async () => {
-      try {
-        const toolDoc = await getDoc(doc(db, "tools", id!));
-        if (toolDoc.exists()) {
-          const toolData = { id: toolDoc.id, ...toolDoc.data() } as DevTool;
-          setTool(toolData);
+  const fetchToolDetails = useCallback(async () => {
+    try {
+      const toolDoc = await getDoc(doc(db, "tools", id!));
+      if (toolDoc.exists()) {
+        const toolData = { id: toolDoc.id, ...toolDoc.data() } as DevTool;
+        setTool(toolData);
 
-          // Fetch category
-          if (toolData.category) {
-            const categoryDoc = await getDoc(toolData.category);
-            if (categoryDoc.exists()) {
-              setCategory((categoryDoc.data() as Category).name);
-            } else {
-              setCategory("Uncategorized");
-            }
+        // Fetch category
+        if (toolData.category) {
+          const categoryDoc = await getDoc(toolData.category);
+          if (categoryDoc.exists()) {
+            setCategory((categoryDoc.data() as Category).name);
           } else {
             setCategory("Uncategorized");
           }
+        } else {
+          setCategory("Uncategorized");
+        }
 
-          // Fetch ecosystem
-          if (toolData.ecosystem) {
-            const ecosystemDoc = await getDoc(toolData.ecosystem);
-            if (ecosystemDoc.exists()) {
-              setEcosystem((ecosystemDoc.data() as EcoSystem).name);
-            } else {
-              setEcosystem("Uncategorized");
-            }
+        // Fetch ecosystem
+        if (toolData.ecosystem) {
+          const ecosystemDoc = await getDoc(toolData.ecosystem);
+          if (ecosystemDoc.exists()) {
+            setEcosystem((ecosystemDoc.data() as EcoSystem).name);
           } else {
             setEcosystem("Uncategorized");
           }
         } else {
-          setError("Tool not found");
+          setEcosystem("Uncategorized");
         }
-      } catch (err) {
-        console.error("Error fetching tool details:", err);
-        setError("Failed to fetch tool details");
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchToolCategoryAndEcosystem();
-  }, [id]);
+        // Check if the tool is liked by the current user
+        if (user) {
+          const likeDoc = await getDoc(doc(db, "likes", `${user.uid}_${id}`));
+          setIsLiked(likeDoc.exists());
+        } else {
+          setIsLiked(false);
+        }
+      } else {
+        setError("Tool not found");
+      }
+    } catch (err) {
+      console.error("Error fetching tool details:", err);
+      setError("Failed to fetch tool details");
+    } finally {
+      setLoading(false);
+    }
+  }, [id, user]);
+
+  useEffect(() => {
+    fetchToolDetails();
+  }, [fetchToolDetails]);
+
+  // Add this new useEffect to handle user authentication state changes
+  useEffect(() => {
+    if (!user) {
+      setIsLiked(false);
+    } else {
+      fetchToolDetails();
+    }
+  }, [user, fetchToolDetails]);
+
+  const handleLikeToggle = async () => {
+    if (!user) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to like this tool.",
+        action: (
+          <Button onClick={() => navigate("/signin")} variant="outline">
+            Sign In
+          </Button>
+        ),
+      });
+      return;
+    }
+
+    if (!tool) return;
+
+    try {
+      const likeId = `${user.uid}_${id}`;
+      const likeRef = doc(db, "likes", likeId);
+      const toolRef = doc(db, "tools", id!);
+
+      if (!isLiked) {
+        const newLike: Like = {
+          id: likeId,
+          user_id: user.uid,
+          tool_id: id!,
+          liked_at: Timestamp.now(),
+        };
+        await setDoc(likeRef, newLike);
+        await setDoc(toolRef, { like_count: increment(1) }, { merge: true });
+        setIsLiked(true);
+        setTool((prevTool) =>
+          prevTool
+            ? { ...prevTool, like_count: (prevTool.like_count || 0) + 1 }
+            : null
+        );
+        toast({
+          title: "Tool Liked",
+          description: `You have liked ${tool.name}.`,
+        });
+      } else {
+        await deleteDoc(likeRef);
+        await setDoc(toolRef, { like_count: increment(-1) }, { merge: true });
+        setIsLiked(false);
+        setTool((prevTool) =>
+          prevTool
+            ? { ...prevTool, like_count: (prevTool.like_count || 1) - 1 }
+            : null
+        );
+        toast({
+          title: "Tool Unliked",
+          description: `You have unliked ${tool.name}.`,
+        });
+      }
+    } catch (error) {
+      console.error("Error toggling like:", error);
+      toast({
+        title: "Error",
+        description:
+          "An error occurred while updating your like. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -84,12 +180,29 @@ const ToolDetails = () => {
               alt={`${tool.name} logo`}
               className="w-20 h-20 object-contain"
             />
-            <div className="text-center sm:text-left">
-              <CardTitle className="text-2xl sm:text-3xl font-bold">
-                {tool.name}
-              </CardTitle>
-              <p className="text-muted-foreground">{category}</p>
-              <p className="text-muted-foreground">{ecosystem}</p>
+            <div className="text-center sm:text-left flex-grow">
+              <div className="flex justify-between items-start">
+                <div>
+                  <CardTitle className="text-2xl sm:text-3xl font-bold">
+                    {tool.name}
+                  </CardTitle>
+                  <p className="text-muted-foreground">{category}</p>
+                  <p className="text-muted-foreground">{ecosystem}</p>
+                </div>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  animate={{ scale: isLiked ? [1, 1.2, 1] : 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Heart
+                    className={`h-6 w-6 cursor-pointer ${
+                      isLiked ? "text-red-500 fill-current" : "text-gray-300"
+                    }`}
+                    onClick={handleLikeToggle}
+                  />
+                </motion.div>
+              </div>
             </div>
           </div>
         </CardHeader>
@@ -145,6 +258,7 @@ const ToolDetails = () => {
           </div>
         </CardContent>
       </Card>
+      <CommentSection toolId={id!} />
     </div>
   );
 };
