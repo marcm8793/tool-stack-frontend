@@ -2,20 +2,25 @@ import { auth, db, storage } from "@/lib/firebase";
 import { User } from "@/types";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   error: Error | null;
+  setUser: (user: User | null) => void;
 }
 
 export const useAuth = (): AuthContextType => {
-  const [authState, setAuthState] = useState<AuthContextType>({
+  const [authState, setAuthState] = useState<Omit<AuthContextType, "setUser">>({
     user: null,
     loading: true,
     error: null,
   });
+
+  const setUser = useCallback((newUser: User | null) => {
+    setAuthState((prevState) => ({ ...prevState, user: newUser }));
+  }, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(
@@ -96,5 +101,5 @@ export const useAuth = (): AuthContextType => {
     return () => unsubscribe();
   }, []);
 
-  return useMemo(() => authState, [authState]);
+  return useMemo(() => ({ ...authState, setUser }), [authState, setUser]);
 };

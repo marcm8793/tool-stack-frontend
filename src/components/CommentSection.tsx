@@ -212,27 +212,31 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ toolId }) => {
       };
 
       return (
-        <div className={`space-y-2 mb-4 ${depth > 0 ? "ml-6" : ""} relative`}>
+        <div
+          className={`space-y-2 mb-4 ${
+            depth > 0 ? "ml-2 sm:ml-4 md:ml-6" : ""
+          } relative`}
+        >
           <div
             className={`absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700 ${
-              depth > 0 ? "-ml-3" : ""
+              depth > 0 ? "-ml-1 sm:-ml-2 md:-ml-3" : ""
             }`}
           />
-          <div className="flex items-start space-x-3 bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm">
-            <Avatar className="w-8 h-8">
+          <div className="flex items-start space-x-2 sm:space-x-3 bg-white dark:bg-gray-900 p-2 sm:p-3 md:p-4 rounded-lg shadow-sm">
+            <Avatar className="w-6 h-6 sm:w-8 sm:h-8">
               <AvatarImage src={comment.user.photoURL} />
               <AvatarFallback>{comment.user.displayName[0]}</AvatarFallback>
             </Avatar>
             <div className="flex-grow">
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-sm dark:text-gray-200">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <span className="font-semibold text-xs sm:text-sm dark:text-gray-200">
                   {comment.user.displayName}
                 </span>
                 <span className="text-xs text-gray-500 dark:text-gray-400">
                   {comment.created_at.toDate().toLocaleString()}
                 </span>
               </div>
-              <p className="text-sm mt-1 dark:text-gray-300">
+              <p className="text-xs sm:text-sm mt-1 dark:text-gray-300">
                 {comment.content}
               </p>
               {user && (
@@ -240,13 +244,13 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ toolId }) => {
                   variant="ghost"
                   size="sm"
                   onClick={() => setReplyingTo(comment.id)}
-                  className="mt-2 text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                  className="mt-1 sm:mt-2 text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                 >
                   Reply
                 </Button>
               )}
               {replyingTo === comment.id && (
-                <div className="mt-3">
+                <div className="mt-2 sm:mt-3">
                   <Textarea
                     ref={replyInputRef}
                     id={`reply-${comment.id}`}
@@ -254,7 +258,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ toolId }) => {
                     value={replyContents[comment.id] || ""}
                     onChange={handleTextareaChange}
                     placeholder="Write a reply..."
-                    className="mb-2 text-sm dark:bg-gray-700 dark:text-gray-200"
+                    className="mb-2 text-xs sm:text-sm dark:bg-gray-700 dark:text-gray-200"
                     rows={3}
                   />
                   <Button
@@ -276,27 +280,29 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ toolId }) => {
     });
 
   return (
-    <div className="container w-6/12 mt-8">
-      <h2 className="text-2xl font-bold mb-4 dark:text-gray-200">Comments</h2>
+    <div className="container w-full sm:w-10/12 md:w-8/12 lg:w-6/12 mt-4 sm:mt-6 md:mt-8 px-2 sm:px-0">
+      <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 dark:text-gray-200">
+        Comments
+      </h2>
       {user ? (
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <Textarea
             id="new-comment"
             name="new-comment"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Write a comment..."
-            className="mb-2 dark:bg-gray-700 dark:text-gray-200"
+            className="mb-2 text-sm dark:bg-gray-700 dark:text-gray-200"
             rows={4}
           />
           <Button onClick={() => handleSubmitComment()}>Post Comment</Button>
         </div>
       ) : (
-        <p className="mb-4 text-gray-600 dark:text-gray-400">
+        <p className="mb-3 sm:mb-4 text-sm text-gray-600 dark:text-gray-400">
           Please sign in to leave a comment.
         </p>
       )}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {comments.map((comment) => (
           <CommentItem key={comment.id} comment={comment} />
         ))}
