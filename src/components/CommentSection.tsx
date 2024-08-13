@@ -9,9 +9,9 @@ import {
   addDoc,
   getDocs,
   Timestamp,
-  doc,
-  getDoc,
   QueryDocumentSnapshot,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -45,18 +45,30 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ toolId }) => {
   );
   const replyInputRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
 
+  const fetchUserData = async (userId: string) => {
+    const userDoc = await getDoc(doc(db, "users", userId));
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      return {
+        displayName: userData.displayName || "Anonymous",
+        photoURL: userData.photoURL || "",
+      };
+    } else {
+      return {
+        displayName: "Anonymous",
+        photoURL: "",
+      };
+    }
+  };
+
   const fetchCommentWithReplies = useCallback(
     async (docSnapshot: QueryDocumentSnapshot): Promise<Comment> => {
       const commentData = docSnapshot.data() as Comment;
       commentData.id = docSnapshot.id;
 
-      // Fetch user data
-      const userDoc = await getDoc(doc(db, "users", commentData.user_id));
-      const userData = userDoc.data();
-      commentData.user = {
-        displayName: userData?.displayName || "Anonymous",
-        photoURL: userData?.photoURL || "",
-      };
+      // Fetch user data from Firestore
+      const userData = await fetchUserData(commentData.user_id);
+      commentData.user = userData;
 
       // Fetch replies recursively
       const repliesQ = query(

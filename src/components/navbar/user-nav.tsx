@@ -1,10 +1,3 @@
-import { useEffect, useState } from "react";
-import {
-  getAuth,
-  onAuthStateChanged,
-  updateProfile,
-  User,
-} from "firebase/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,34 +10,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/hooks/useAuth";
+import { auth } from "@/lib/firebase";
 
 export function UserNav() {
-  const [user, setUser] = useState<User | null>(null);
-  const auth = getAuth();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        if (!currentUser.photoURL) {
-          const avatarUrl = `https://api.dicebear.com/6.x/shapes/svg?seed=${currentUser.uid}`;
-          try {
-            await updateProfile(currentUser, { photoURL: avatarUrl });
-            // Update the local user state with the new photoURL
-            setUser({ ...currentUser, photoURL: avatarUrl });
-          } catch (error) {
-            console.error("Error updating photo URL:", error);
-            setUser(currentUser);
-          }
-        } else {
-          setUser(currentUser);
-        }
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [auth]);
+  const { user } = useAuth();
 
   const handleLogout = async () => {
     try {
