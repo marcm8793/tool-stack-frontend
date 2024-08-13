@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 
 const MobileNav = () => {
-  const user = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   return (

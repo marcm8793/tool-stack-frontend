@@ -5,7 +5,7 @@ import { UserNav } from "./user-nav";
 import { useAuth } from "@/hooks/useAuth";
 
 const Navbar = () => {
-  const user = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   return (

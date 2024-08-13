@@ -1,4 +1,4 @@
-import { DocumentReference } from "firebase/firestore";
+import { DocumentReference, Timestamp } from "firebase/firestore";
 
 export interface DevTool {
   id: string;
@@ -11,6 +11,7 @@ export interface DevTool {
   logo_url: string;
   name: string;
   website_url: string;
+  like_count: number;
 }
 
 export interface DevToolsState {
@@ -24,7 +25,6 @@ export interface DevToolsState {
 export interface User {
   uid: string;
   email: string | null;
-  password?: string;
   emailVerified: boolean;
   isAnonymous: boolean;
   displayName: string | null;
@@ -40,4 +40,11 @@ export interface Category {
 export interface EcoSystem {
   id: string;
   name: string;
+}
+
+export interface Like {
+  id: string;
+  user_id: string;
+  tool_id: string;
+  liked_at: Timestamp;
 }
