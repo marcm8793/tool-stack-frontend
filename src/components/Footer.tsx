@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>Built with 💻</p>
+          <p>Built with 💻 & ⌨️</p>
         </div>
       </div>
     </footer>
