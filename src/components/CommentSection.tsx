@@ -16,6 +16,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import CommentSectionSkeleton from "./skeletons/CommentSectionSkeleton";
 
 interface Comment {
   id: string;
@@ -44,6 +45,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ toolId }) => {
     {}
   );
   const replyInputRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
+  const [loading, setLoading] = useState(true);
 
   const fetchUserData = async (userId: string) => {
     const userDoc = await getDoc(doc(db, "users", userId));
@@ -89,6 +91,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ toolId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
+        setLoading(true);
         const q = query(
           collection(db, "comments"),
           where("tool_id", "==", toolId),
@@ -106,6 +109,8 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ toolId }) => {
         setComments(commentsData);
       } catch (error) {
         console.error("Error fetching comments:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -278,6 +283,10 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ toolId }) => {
         </div>
       );
     });
+
+  if (loading) {
+    return <CommentSectionSkeleton />;
+  }
 
   return (
     <div className="container w-full sm:w-10/12 md:w-8/12 lg:w-6/12 mt-4 sm:mt-6 md:mt-8 px-2 sm:px-0">

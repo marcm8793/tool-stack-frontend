@@ -18,6 +18,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CommentSection } from "@/components/CommentSection";
+import ToolDetailsSkeleton from "@/components/skeletons/ToolDetailsSkeleton";
 
 const ToolDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -159,7 +160,12 @@ const ToolDetails = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        <ToolDetailsSkeleton />
+      </div>
+    );
   if (error) return <div>Error: {error}</div>;
   if (!tool) return <div>Tool not found</div>;
 

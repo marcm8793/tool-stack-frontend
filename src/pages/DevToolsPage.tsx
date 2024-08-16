@@ -1,3 +1,4 @@
+import DevToolsSkeleton from "@/components/skeletons/DevToolsSkeleton";
 import { columns } from "@/components/tooltable/Columns";
 import { DataTable } from "@/components/tooltable/data-table";
 import { useToast } from "@/components/ui/use-toast";
@@ -154,7 +155,7 @@ const DevTools: React.FC = () => {
     [user, toast]
   );
 
-  if (state.isLoading) return <div>Loading...</div>;
+  if (state.isLoading) return <DevToolsSkeleton />;
   if (state.error) return <div>Error: {state.error}</div>;
 
   const updatedColumns = columns({
