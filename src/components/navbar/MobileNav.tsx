@@ -1,8 +1,8 @@
 import { useAuth } from "@/hooks/useAuth";
-import { ModeToggle } from "./Mode-toggle";
 import { UserNav } from "./user-nav";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
+import { ModeToggle } from "./Mode-toggle";
 
 const MobileNav = () => {
   const { user } = useAuth();
