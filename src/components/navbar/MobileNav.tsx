@@ -2,7 +2,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { UserNav } from "./user-nav";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { ModeToggle } from "./Mode-toggle";
+import { ModeToggle } from "./mode-toggle";
 
 const MobileNav = () => {
   const { user } = useAuth();

@@ -4,7 +4,7 @@ import "./globals.css";
 import AppRoutes from "./AppRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Toaster } from "./components/ui/toaster";
-import { ThemeProvider } from "./components/navbar/Theme-provider";
+import { ThemeProvider } from "./components/navbar/theme-provider";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

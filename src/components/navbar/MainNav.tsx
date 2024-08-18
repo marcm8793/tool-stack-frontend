@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { UserNav } from "./user-nav";
 import { useAuth } from "@/hooks/useAuth";
-import { ModeToggle } from "./Mode-toggle";
+import { ModeToggle } from "./mode-toggle";
 
 const Navbar = () => {
   const { user } = useAuth();
