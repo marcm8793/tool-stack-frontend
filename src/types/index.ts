@@ -48,3 +48,7 @@ export interface Like {
   tool_id: string;
   liked_at: Timestamp;
 }
+
+export interface AdminCheckProps {
+  children: React.ReactNode;
+}
