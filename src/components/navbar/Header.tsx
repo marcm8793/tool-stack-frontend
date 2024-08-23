@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import MainNav from "./MainNav";
 import MobileNav from "./MobileNav";
+import SearchBar from "../SearchBar";
 
 const Header = () => {
   return (
@@ -12,6 +13,7 @@ const Header = () => {
         >
           ToolStack
         </Link>
+        <SearchBar />
         <div className="md:hidden">
           <MobileNav />
         </div>
