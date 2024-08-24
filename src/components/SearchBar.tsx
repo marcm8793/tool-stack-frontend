@@ -3,7 +3,7 @@ import Typesense from "typesense";
 import { DevTool } from "@/types";
 import { Link } from "react-router-dom";
 import { Command } from "./ui/command";
-import { LinkIcon, X } from "lucide-react";
+import { CommandIcon, LinkIcon, TowerControlIcon, X } from "lucide-react";
 
 const typesenseClient = new Typesense.Client({
   nodes: [
@@ -22,6 +22,12 @@ const SearchBar: React.FC = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<DevTool[]>([]);
   const searchRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    setIsMac(navigator.platform.toUpperCase().indexOf("MAC") >= 0);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -36,6 +42,21 @@ const SearchBar: React.FC = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "k") {
+        event.preventDefault();
+        inputRef.current?.focus();
+        setIsOpen(true);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -89,6 +110,7 @@ const SearchBar: React.FC = () => {
         onClick={() => setIsOpen(true)}
       >
         <input
+          ref={inputRef}
           type="text"
           placeholder="Search tools..."
           className="w-full outline-none dark:text-white dark:bg-transparent"
@@ -96,7 +118,7 @@ const SearchBar: React.FC = () => {
           onChange={(e) => handleSearch(e.target.value)}
           onFocus={() => setIsOpen(true)}
         />
-        {query && (
+        {query ? (
           <X
             className="h-4 w-4 text-gray-500 cursor-pointer flex-shrink-0"
             onClick={(e) => {
@@ -104,6 +126,11 @@ const SearchBar: React.FC = () => {
               handleReset();
             }}
           />
+        ) : (
+          <div className="flex items-center text-gray-500 text-sm">
+            {isMac ? <CommandIcon size={14} /> : <TowerControlIcon size={14} />}
+            <span className="ml-1">K</span>
+          </div>
         )}
       </div>
       {isOpen && (
