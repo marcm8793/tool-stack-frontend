@@ -34,7 +34,21 @@ const Footer = () => {
         </div>
 
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>Built with 💻 & ⌨️</p>
+          <div className="mt-2 flex flex-wrap justify-center items-center gap-2">
+            <span className="flex items-center gap-1">
+              Frontend: React
+              <Icons.react className="" />
+            </span>
+            <span className="hidden sm:inline">|</span>
+            <span className="flex items-center gap-1">
+              Backend: Firebase
+              <Icons.firebase className="" />
+            </span>
+            <span className="hidden sm:inline">|</span>
+            <span className="flex items-center gap-1">
+              Search: <Icons.typeSense className="" />
+            </span>
+          </div>
         </div>
       </div>
     </footer>

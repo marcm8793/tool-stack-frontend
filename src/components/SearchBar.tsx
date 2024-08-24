@@ -147,7 +147,7 @@ const SearchBar: React.FC = () => {
           ref={inputRef}
           type="text"
           placeholder="Search tools..."
-          className="w-full outline-none dark:text-white dark:bg-transparent"
+          className="w-full outline-none dark:text-white dark:bg-transparent text-xs md:text-base"
           value={query}
           onChange={(e) => handleSearch(e.target.value)}
           onFocus={() => setIsOpen(true)}
