@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { Search } from "lucide-react";
 import Typesense from "typesense";
 import { DevTool } from "@/types";
 import { Link } from "react-router-dom";
+import { Command } from "./ui/command";
+import { LinkIcon, X } from "lucide-react";
 
 const typesenseClient = new Typesense.Client({
   nodes: [
@@ -52,6 +53,7 @@ const SearchBar: React.FC = () => {
           });
         const newResults =
           searchResults.hits?.map((hit) => hit.document as DevTool) || [];
+
         setResults(newResults);
       } catch (error) {
         console.error("Error searching Typesense:", error);
@@ -62,41 +64,76 @@ const SearchBar: React.FC = () => {
     }
   };
 
+  const handleReset = () => {
+    setQuery("");
+    setResults([]);
+  };
+
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleReset();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   return (
-    <div className="relative" ref={searchRef}>
+    <div className="relative w-64 h-9" ref={searchRef}>
       <div
-        className="flex items-center border rounded-md p-2 cursor-text"
+        className="flex items-center border rounded-md p-2 cursor-text space-x-2 h-full"
         onClick={() => setIsOpen(true)}
       >
-        <Search className="w-5 h-5 text-gray-400 mr-2" />
         <input
           type="text"
           placeholder="Search tools..."
-          className="w-full outline-none"
+          className="w-full outline-none dark:text-white dark:bg-transparent"
           value={query}
           onChange={(e) => handleSearch(e.target.value)}
           onFocus={() => setIsOpen(true)}
         />
+        {query && (
+          <X
+            className="h-4 w-4 text-gray-500 cursor-pointer flex-shrink-0"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleReset();
+            }}
+          />
+        )}
       </div>
       {isOpen && (
-        <div className="absolute z-10 w-full mt-1 bg-white border rounded-md shadow-lg">
-          {results.length === 0 && query !== "" ? (
-            <div className="p-2 text-sm text-gray-500">No results found.</div>
-          ) : (
-            <ul>
-              {results.map((result) => (
-                <li key={result.id} className="border-b last:border-b-0">
-                  <Link
-                    to={`/tools/${result.id}`}
-                    className="block p-2 hover:bg-gray-100"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div className="font-medium">{result.name}</div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
+        <div className="absolute w-full mt-1 border rounded-md shadow-lg bg-white dark:bg-gray-800 z-10">
+          <Command className="w-full max-h-[300px] overflow-y-auto">
+            {results.length === 0 && query === "" ? (
+              <div className="p-2 text-sm text-gray-500 dark:text-white dark:bg-transparent">
+                Start typing to search...
+              </div>
+            ) : results.length === 0 ? (
+              <div className="p-2 text-sm text-gray-500 dark:text-white dark:bg-transparent">
+                No results found.
+              </div>
+            ) : (
+              <ul>
+                {results.map((result) => (
+                  <li key={result.id} className="border-b last:border-b-0">
+                    <Link
+                      to={`/tools/${result.id}`}
+                      className="p-2 hover:bg-gray-100 dark:text-white dark:bg-transparent dark:hover:bg-gray-800 flex justify-between items-center"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <div className="font-medium">{result.name}</div>
+                      <LinkIcon className="h-4 w-4 text-gray-500 flex-shrink-0" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Command>
         </div>
       )}
     </div>
