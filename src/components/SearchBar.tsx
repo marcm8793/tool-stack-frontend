@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Typesense from "typesense";
 import { DevTool } from "@/types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Command } from "./ui/command";
 import { CommandIcon, LinkIcon, TowerControlIcon, X } from "lucide-react";
 
@@ -24,6 +24,8 @@ const SearchBar: React.FC = () => {
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMac, setIsMac] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsMac(navigator.platform.toUpperCase().indexOf("MAC") >= 0);
@@ -59,6 +61,38 @@ const SearchBar: React.FC = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!isOpen) return;
+
+      switch (event.key) {
+        case "ArrowDown":
+          event.preventDefault();
+          setSelectedIndex((prevIndex) =>
+            prevIndex < results.length - 1 ? prevIndex + 1 : prevIndex
+          );
+          break;
+        case "ArrowUp":
+          event.preventDefault();
+          setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : -1));
+          break;
+        case "Enter":
+          event.preventDefault();
+          if (selectedIndex >= 0 && selectedIndex < results.length) {
+            navigate(`/tools/${results[selectedIndex].id}`);
+            setIsOpen(false);
+            handleReset();
+          }
+          break;
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, results, selectedIndex, navigate]);
 
   const handleSearch = async (searchQuery: string) => {
     setQuery(searchQuery);
@@ -146,12 +180,19 @@ const SearchBar: React.FC = () => {
               </div>
             ) : (
               <ul>
-                {results.map((result) => (
+                {results.map((result, index) => (
                   <li key={result.id} className="border-b last:border-b-0">
                     <Link
                       to={`/tools/${result.id}`}
-                      className="p-2 hover:bg-gray-100 dark:text-white dark:bg-transparent dark:hover:bg-gray-800 flex justify-between items-center"
-                      onClick={() => setIsOpen(false)}
+                      className={`p-2 hover:bg-gray-200 dark:text-white dark:bg-transparent dark:hover:bg-gray-800 flex justify-between items-center ${
+                        index === selectedIndex
+                          ? "bg-gray-100 dark:bg-gray-700"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        setIsOpen(false);
+                        handleReset();
+                      }}
                     >
                       <div className="font-medium">{result.name}</div>
                       <LinkIcon className="h-4 w-4 text-gray-500 flex-shrink-0" />
