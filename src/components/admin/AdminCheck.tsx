@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AdminCheckProps } from "@/types";
+import { Navigate } from "react-router-dom";
 
 const AdminCheck: React.FC<AdminCheckProps> = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -25,7 +26,7 @@ const AdminCheck: React.FC<AdminCheckProps> = ({ children }) => {
     return <div>Loading...</div>;
   }
 
-  return isAdmin ? <>{children}</> : <div>Access denied</div>;
+  return isAdmin ? <>{children}</> : <Navigate to="/" />;
 };
 
 export default AdminCheck;
