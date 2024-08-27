@@ -6,6 +6,7 @@ import Layout from "./layouts/Layout";
 import { SignInForm } from "./components/auth/Sign-in";
 import { SignUpForm } from "./components/auth/Sign-up";
 import ProfilePage from "./pages/ProfilePage";
+import AddToolPage from "./pages/AddToolPage";
 
 const AppRoutes = () => {
   return (
@@ -55,6 +56,14 @@ const AppRoutes = () => {
         element={
           <Layout>
             <ProfilePage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/add-tool"
+        element={
+          <Layout>
+            <AddToolPage />
           </Layout>
         }
       />
