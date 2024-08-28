@@ -33,7 +33,7 @@ const AdminPage = () => {
         <TabsContent value="tools">
           <h2 className="text-2xl font-semibold mb-4">Tools Management</h2>
           <Button onClick={() => navigate("/admin/add-tool")}>
-            Add New Tool
+            Add New Tool-test
           </Button>
           {/* Add tool management content here */}
         </TabsContent>
