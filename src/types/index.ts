@@ -35,11 +35,15 @@ export interface User {
 export interface Category {
   id: string;
   name: string;
+  created_at: Timestamp;
+  updated_at: Timestamp;
 }
 
 export interface EcoSystem {
   id: string;
   name: string;
+  created_at: Timestamp;
+  updated_at: Timestamp;
 }
 
 export interface Like {

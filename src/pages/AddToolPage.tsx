@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useNavigate } from "react-router-dom";
 
 const toolSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -46,6 +47,7 @@ type ToolFormData = z.infer<typeof toolSchema>;
 const AddToolPage = () => {
   const { isAdmin, loading } = useAdminAccess();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [newBadge, setNewBadge] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
@@ -60,12 +62,16 @@ const AddToolPage = () => {
         categoriesSnapshot.docs.map((doc) => ({
           id: doc.id,
           name: doc.data().name,
+          created_at: doc.data().created_at,
+          updated_at: doc.data().updated_at,
         }))
       );
       setEcosystems(
         ecosystemsSnapshot.docs.map((doc) => ({
           id: doc.id,
           name: doc.data().name,
+          created_at: doc.data().created_at,
+          updated_at: doc.data().updated_at,
         }))
       );
     };
@@ -150,6 +156,9 @@ const AddToolPage = () => {
 
   return (
     <div className="container mx-auto p-6">
+      <Button onClick={() => navigate("/admin")} className="mb-6">
+        Back to Admin
+      </Button>
       <h1 className="text-3xl font-bold mb-6">Add New Tool</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>

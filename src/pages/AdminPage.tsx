@@ -3,6 +3,8 @@ import { useAdminAccess } from "@/hooks/useAdminAccess";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AddCategoryForm from "@/components/admin/AddCategoryForm";
+import AddEcosystemForm from "@/components/admin/AddEcosystemForm";
 
 const AdminPage = () => {
   const { isAdmin, loading } = useAdminAccess();
@@ -14,7 +16,7 @@ const AdminPage = () => {
   }
 
   if (!isAdmin) {
-    return null; // This will not be rendered due to redirection in the hook
+    return null;
   }
 
   return (
@@ -32,10 +34,22 @@ const AdminPage = () => {
         </TabsContent>
         <TabsContent value="tools">
           <h2 className="text-2xl font-semibold mb-4">Tools Management</h2>
-          <Button onClick={() => navigate("/admin/add-tool")}>
-            Add New Tool
-          </Button>
-          {/* Add tool management content here */}
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Add New Tool</h3>
+              <Button onClick={() => navigate("/admin/add-tool")}>
+                Add New Tool
+              </Button>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Add New Category</h3>
+              <AddCategoryForm />
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Add New Ecosystem</h3>
+              <AddEcosystemForm />
+            </div>
+          </div>
         </TabsContent>
         <TabsContent value="users">
           <h2 className="text-2xl font-semibold mb-4">User Management</h2>
