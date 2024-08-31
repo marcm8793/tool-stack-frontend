@@ -11,7 +11,7 @@ import { addNewTool } from "@/lib/firebaseToolFuctions";
 import { X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
-import { Category, DevTool, EcoSystem } from "@/types";
+import { Category, EcoSystem, NewToolData } from "@/types";
 import {
   collection,
   doc,
@@ -114,7 +114,7 @@ const AddToolPage = () => {
     if (!isAdmin) return;
     setIsSubmitting(true);
     try {
-      const toolData: Omit<DevTool, "id" | "like_count"> = {
+      const toolData: NewToolData = {
         ...data,
         category: doc(
           db,
@@ -128,12 +128,14 @@ const AddToolPage = () => {
         ) as DocumentReference<EcoSystem>,
         github_stars: Number(data.github_stars),
       };
+
       await addNewTool(toolData);
       toast({
         title: "Success",
         description: "Tool added successfully",
       });
       reset();
+      setNewBadge("");
     } catch (error) {
       toast({
         title: "Error",
@@ -232,6 +234,7 @@ const AddToolPage = () => {
           )}
         </div>
         <div>
+          <Label htmlFor="logo_url">Logo URL</Label>
           <Input {...register("logo_url")} placeholder="Logo URL" />
           {errors.logo_url && (
             <p className="text-red-500">{errors.logo_url.message}</p>

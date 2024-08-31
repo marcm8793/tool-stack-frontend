@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddCategoryForm from "@/components/admin/AddCategoryForm";
 import AddEcosystemForm from "@/components/admin/AddEcosystemForm";
+import ManageToolsForm from "@/components/admin/ManageToolsForm";
 
 const AdminPage = () => {
   const { isAdmin, loading } = useAdminAccess();
@@ -28,6 +29,9 @@ const AdminPage = () => {
           <TabsTrigger value="tools">Tools</TabsTrigger>
           <TabsTrigger value="users">Users</TabsTrigger>
         </TabsList>
+        <TabsContent value="tools">
+          <ManageToolsForm />
+        </TabsContent>
         <TabsContent value="overview">
           <h2 className="text-2xl font-semibold mb-4">Overview</h2>
           {/* Add overview content here */}

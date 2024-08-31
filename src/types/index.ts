@@ -56,3 +56,5 @@ export interface Like {
 export interface AdminCheckProps {
   children: React.ReactNode;
 }
+
+export type NewToolData = Omit<DevTool, "id" | "like_count">;
