@@ -161,7 +161,7 @@ const SearchBar: React.FC = () => {
             }}
           />
         ) : (
-          <div className="flex items-center text-gray-500 text-sm">
+          <div className="flex items-center justify-center text-gray-500 text-sm">
             {isMac ? <CommandIcon size={14} /> : <SquareChevronUp size={14} />}
             <span className="ml-1">K</span>
           </div>
