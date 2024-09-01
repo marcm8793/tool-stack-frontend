@@ -181,13 +181,15 @@ const ToolDetails = () => {
       <Card className="w-full max-w-3xl mx-auto">
         <CardHeader>
           <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
-            <img
-              src={tool.logo_url}
-              alt={`${tool.name} logo`}
-              className="w-20 h-20 object-contain"
-            />
-            <div className="text-center sm:text-left flex-grow">
-              <div className="flex justify-between items-start">
+            <div className="relative w-24 h-24 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-md">
+              <img
+                src={tool.logo_url}
+                alt={`${tool.name} logo`}
+                className="w-full h-full object-contain rounded-md"
+              />
+            </div>
+            <div className="text-center sm:text-left flex-grow w-full">
+              <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start">
                 <div>
                   <CardTitle className="text-2xl sm:text-3xl font-bold">
                     {tool.name}
@@ -200,9 +202,10 @@ const ToolDetails = () => {
                   whileTap={{ scale: 0.9 }}
                   animate={{ scale: isLiked ? [1, 1.2, 1] : 1 }}
                   transition={{ duration: 0.3 }}
+                  className="mt-4 sm:mt-0"
                 >
                   <Heart
-                    className={`h-6 w-6 cursor-pointer ${
+                    className={`h-8 w-8 sm:h-6 sm:w-6 cursor-pointer ${
                       isLiked ? "text-red-500 fill-current" : "text-gray-300"
                     }`}
                     onClick={handleLikeToggle}
