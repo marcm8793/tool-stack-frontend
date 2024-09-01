@@ -179,7 +179,11 @@ const AddToolPage = () => {
             name="category"
             control={control}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                key={field.value}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
@@ -203,7 +207,11 @@ const AddToolPage = () => {
             name="ecosystem"
             control={control}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                key={field.value}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select an ecosystem" />
                 </SelectTrigger>
