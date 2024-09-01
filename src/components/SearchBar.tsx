@@ -3,7 +3,7 @@ import Typesense from "typesense";
 import { DevTool } from "@/types";
 import { Link, useNavigate } from "react-router-dom";
 import { Command } from "./ui/command";
-import { CommandIcon, LinkIcon, TowerControlIcon, X } from "lucide-react";
+import { CommandIcon, LinkIcon, SquareChevronUp, X } from "lucide-react";
 
 const typesenseClient = new Typesense.Client({
   nodes: [
@@ -162,7 +162,7 @@ const SearchBar: React.FC = () => {
           />
         ) : (
           <div className="flex items-center text-gray-500 text-sm">
-            {isMac ? <CommandIcon size={14} /> : <TowerControlIcon size={14} />}
+            {isMac ? <CommandIcon size={14} /> : <SquareChevronUp size={14} />}
             <span className="ml-1">K</span>
           </div>
         )}
