@@ -21,7 +21,7 @@ import { CommentSection } from "@/components/CommentSection";
 import ToolDetailsSkeleton from "@/components/skeletons/ToolDetailsSkeleton";
 
 const ToolDetails = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
@@ -35,10 +35,21 @@ const ToolDetails = () => {
 
   const fetchToolDetails = useCallback(async () => {
     try {
+      const [id] = slug!.split("-");
       const toolDoc = await getDoc(doc(db, "tools", id!));
       if (toolDoc.exists()) {
         const toolData = { id: toolDoc.id, ...toolDoc.data() } as DevTool;
         setTool(toolData);
+
+        // Generate the correct slug
+        const correctSlug = `${id}-${encodeURIComponent(
+          toolData.name.toLowerCase().replace(/\s+/g, "-")
+        )}`;
+
+        // If the slug in the URL doesn't match the correct slug, update the URL
+        if (slug !== correctSlug) {
+          navigate(`/tools/${correctSlug}`, { replace: true });
+        }
 
         // Fetch category
         if (toolData.category) {
@@ -80,7 +91,7 @@ const ToolDetails = () => {
     } finally {
       setLoading(false);
     }
-  }, [id, user]);
+  }, [slug, navigate, user]);
 
   useEffect(() => {
     fetchToolDetails();
@@ -112,15 +123,15 @@ const ToolDetails = () => {
     if (!tool) return;
 
     try {
-      const likeId = `${user.uid}_${id}`;
+      const likeId = `${user.uid}_${tool.id}`;
       const likeRef = doc(db, "likes", likeId);
-      const toolRef = doc(db, "tools", id!);
+      const toolRef = doc(db, "tools", tool.id!);
 
       if (!isLiked) {
         const newLike: Like = {
           id: likeId,
           user_id: user.uid,
-          tool_id: id!,
+          tool_id: tool.id,
           liked_at: Timestamp.now(),
         };
         await setDoc(likeRef, newLike);
@@ -273,7 +284,7 @@ const ToolDetails = () => {
           </div>
         </CardContent>
       </Card>
-      <CommentSection toolId={id!} />
+      <CommentSection toolId={tool.id!} />
     </div>
   );
 };

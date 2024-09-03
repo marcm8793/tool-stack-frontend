@@ -30,10 +30,10 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/tools/:id"
+        path="/tools/:slug"
         element={
           <Layout>
-            <ToolDetails />{" "}
+            <ToolDetails />
           </Layout>
         }
       />

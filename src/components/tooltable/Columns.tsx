@@ -29,12 +29,20 @@ export const columns = ({
       <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => {
-      const id: string = row.original.id;
-      const name: string = row.getValue("name");
+      //TODO: Fix this
+      // const id: string = row.original.id;
+      // const name: string = row.getValue("name");
       return (
         <div className="flex space-x-2 ">
-          <Link to={`/tools/${id}`} className="text-blue-500 hover:underline">
-            <span className="max-w-[500px] truncate font-medium">{name}</span>
+          <Link
+            to={`/tools/${row.original.id}-${encodeURIComponent(
+              row.original.name.toLowerCase().replace(/\s+/g, "-")
+            )}`}
+            className="text-blue-500 hover:underline"
+          >
+            <span className="max-w-[500px] truncate font-medium">
+              {row.original.name}
+            </span>
           </Link>
         </div>
       );
