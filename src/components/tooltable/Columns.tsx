@@ -125,10 +125,14 @@ export const columns = ({
       <DataTableColumnHeader column={column} title="Github Stars" />
     ),
     cell: ({ row }) => {
+      const github_stars = row.getValue("github_stars");
+
       return (
         <div className="flex space-x-2">
           <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("github_stars")}
+            {github_stars !== null && github_stars !== undefined
+              ? github_stars.toLocaleString()
+              : "N/A"}
           </span>
         </div>
       );

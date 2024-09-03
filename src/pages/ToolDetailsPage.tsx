@@ -234,20 +234,26 @@ const ToolDetails = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-              <Link
-                to={tool.github_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-blue-500 hover:underline"
-              >
-                <Github className="mr-2" size={20} />
-                GitHub Repository
-                <ExternalLink size={16} className="ml-1" />
-              </Link>
-              <div className="flex items-center">
-                <Star className="mr-1 text-yellow-400" size={20} />
-                <span>{tool.github_stars.toLocaleString()} stars</span>
-              </div>
+              {tool.github_link ? (
+                <Link
+                  to={tool.github_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-blue-500 hover:underline"
+                >
+                  <Github className="mr-2" size={20} />
+                  GitHub Repository
+                  <ExternalLink size={16} className="ml-1" />
+                </Link>
+              ) : (
+                <span>No GitHub Repository</span>
+              )}
+              {tool.github_stars && (
+                <div className="flex items-center">
+                  <Star className="mr-1 text-yellow-400" size={20} />
+                  <span>{tool.github_stars.toLocaleString()} stars</span>
+                </div>
+              )}
             </div>
 
             {tool.website_url && (

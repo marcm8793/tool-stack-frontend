@@ -27,23 +27,43 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
+import { Checkbox } from "@/components/ui/checkbox";
 
-const toolSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  description: z.string().min(10, "Description must be at least 10 characters"),
-  category: z.string().min(1, "Category is required"),
-  ecosystem: z.string().min(1, "Ecosystem is required"),
-  github_link: z.string().url("Must be a valid URL"),
-  website_url: z.string().url("Must be a valid URL"),
-  logo_url: z.string().url("Must be a valid URL"),
-  github_stars: z
-    .number()
-    .int()
-    .nonnegative("GitHub stars must be a non-negative integer"),
-  badges: z.array(z.string()),
-});
+const toolSchema = z
+  .object({
+    name: z.string().min(1, "Name is required"),
+    description: z
+      .string()
+      .min(10, "Description must be at least 10 characters"),
+    category: z.string().min(1, "Category is required"),
+    ecosystem: z.string().min(1, "Ecosystem is required"),
+    noGithubRepo: z.boolean(),
+    github_link: z.string().url("Must be a valid URL").nullable(),
+    website_url: z.string().url("Must be a valid URL"),
+    logo_url: z.string().url("Must be a valid URL"),
+    github_stars: z
+      .number()
+      .int()
+      .nonnegative("GitHub stars must be a non-negative integer")
+      .nullable(),
+    badges: z.array(z.string()),
+  })
+  .refine(
+    (data) => {
+      if (data.noGithubRepo) {
+        return data.github_link === null && data.github_stars === null;
+      }
+      return data.github_link !== null && data.github_stars !== null;
+    },
+    {
+      message:
+        "GitHub link and stars are required if 'No GitHub repo' is not checked",
+      path: ["github_link", "github_stars"],
+    }
+  );
 
 type ToolFormData = z.infer<typeof toolSchema>;
+
 const AddToolPage = () => {
   const { isAdmin, loading } = useAdminAccess();
   const { toast } = useToast();
@@ -91,6 +111,7 @@ const AddToolPage = () => {
     resolver: zodResolver(toolSchema),
     defaultValues: {
       badges: [],
+      noGithubRepo: false,
     },
   });
 
@@ -110,6 +131,8 @@ const AddToolPage = () => {
     );
   };
 
+  const noGithubRepo = watch("noGithubRepo");
+
   const onSubmit = async (data: ToolFormData) => {
     if (!isAdmin) return;
     setIsSubmitting(true);
@@ -126,7 +149,8 @@ const AddToolPage = () => {
           "ecosystems",
           data.ecosystem
         ) as DocumentReference<EcoSystem>,
-        github_stars: Number(data.github_stars),
+        github_link: data.noGithubRepo ? null : data.github_link,
+        github_stars: data.noGithubRepo ? null : data.github_stars,
       };
 
       await addNewTool(toolData);
@@ -229,12 +253,7 @@ const AddToolPage = () => {
             <p className="text-red-500">{errors.ecosystem.message}</p>
           )}
         </div>
-        <div>
-          <Input {...register("github_link")} placeholder="GitHub Link" />
-          {errors.github_link && (
-            <p className="text-red-500">{errors.github_link.message}</p>
-          )}
-        </div>
+
         <div>
           <Input {...register("website_url")} placeholder="Website URL" />
           {errors.website_url && (
@@ -248,16 +267,57 @@ const AddToolPage = () => {
             <p className="text-red-500">{errors.logo_url.message}</p>
           )}
         </div>
-        <div>
-          <Input
-            {...register("github_stars", { valueAsNumber: true })}
-            type="number"
-            placeholder="GitHub Stars"
+        <div className="flex items-center space-x-2">
+          <Controller
+            name="noGithubRepo"
+            control={control}
+            render={({ field }) => (
+              <Checkbox
+                id="noGithubRepo"
+                checked={field.value}
+                onCheckedChange={(checked) => {
+                  field.onChange(checked);
+                  if (checked) {
+                    setValue("github_link", null);
+                    setValue("github_stars", null);
+                  }
+                }}
+              />
+            )}
           />
-          {errors.github_stars && (
-            <p className="text-red-500">{errors.github_stars.message}</p>
-          )}
+          <Label htmlFor="noGithubRepo">No GitHub repo</Label>
         </div>
+        {!noGithubRepo && (
+          <>
+            <div>
+              <Input {...register("github_link")} placeholder="GitHub Link" />
+              {errors.github_link && (
+                <p className="text-red-500">{errors.github_link.message}</p>
+              )}
+            </div>
+            <div>
+              <Controller
+                name="github_stars"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    type="number"
+                    placeholder="GitHub Stars"
+                    value={field.value === null ? "" : field.value}
+                    onChange={(e) =>
+                      field.onChange(
+                        e.target.value ? Number(e.target.value) : null
+                      )
+                    }
+                  />
+                )}
+              />
+              {errors.github_stars && (
+                <p className="text-red-500">{errors.github_stars.message}</p>
+              )}
+            </div>
+          </>
+        )}
         <div>
           <Label htmlFor="badges">Badges</Label>
           <div className="flex items-center space-x-2 mb-2">

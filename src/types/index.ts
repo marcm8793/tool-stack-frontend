@@ -6,8 +6,8 @@ export interface DevTool {
   category: DocumentReference<Category>;
   description: string;
   ecosystem: DocumentReference<EcoSystem>;
-  github_link: string;
-  github_stars: number;
+  github_link: string | null;
+  github_stars: number | null;
   logo_url: string;
   name: string;
   website_url: string;
