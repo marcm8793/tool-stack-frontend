@@ -31,6 +31,9 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
+import { Badge } from "../ui/badge";
+import { X } from "lucide-react";
+import { Label } from "../ui/label";
 
 const toolSchema = z.object({
   id: z.string().min(1, "Tool ID is required"),
@@ -57,12 +60,15 @@ const ManageToolsForm = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [ecosystems, setEcosystems] = useState<EcoSystem[]>([]);
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
+  const [newBadge, setNewBadge] = useState("");
 
   const {
     register,
     handleSubmit,
     control,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<ToolFormData>({
     resolver: zodResolver(toolSchema),
@@ -93,6 +99,22 @@ const ManageToolsForm = () => {
 
     fetchData();
   }, []);
+
+  const badges = watch("badges") || [];
+
+  const addBadge = () => {
+    if (newBadge.trim() !== "" && !badges.includes(newBadge.trim())) {
+      setValue("badges", [...badges, newBadge.trim()]);
+      setNewBadge("");
+    }
+  };
+
+  const removeBadge = (badge: string) => {
+    setValue(
+      "badges",
+      badges.filter((b) => b !== badge)
+    );
+  };
 
   const onSubmit = async (data: ToolFormData) => {
     setIsSubmitting(true);
@@ -155,7 +177,11 @@ const ManageToolsForm = () => {
         ...selectedTool,
         category: selectedTool.category.id,
         ecosystem: selectedTool.ecosystem.id,
+        github_link: selectedTool.github_link || "N/A",
+        github_stars: selectedTool.github_stars || undefined,
+        badges: selectedTool.badges || [],
       });
+      setNewBadge("");
     }
   };
 
@@ -309,6 +335,43 @@ const ManageToolsForm = () => {
         {errors.github_stars && (
           <p className="text-red-500">{errors.github_stars.message}</p>
         )}
+        <div>
+          <Label htmlFor="badges">Badges</Label>
+          <div className="flex items-center space-x-2 mb-2">
+            <Input
+              id="newBadge"
+              value={newBadge}
+              onChange={(e) => setNewBadge(e.target.value)}
+              placeholder="Enter a badge"
+            />
+            <Button type="button" onClick={addBadge}>
+              Add Badge
+            </Button>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Controller
+              name="badges"
+              control={control}
+              render={({ field }) => (
+                <>
+                  {field.value?.map((badge, index) => (
+                    <Badge
+                      key={index}
+                      variant="secondary"
+                      className="flex items-center"
+                    >
+                      {badge}
+                      <X
+                        className="ml-1 h-3 w-3 cursor-pointer"
+                        onClick={() => removeBadge(badge)}
+                      />
+                    </Badge>
+                  ))}
+                </>
+              )}
+            />
+          </div>
+        </div>
         <Button type="submit" disabled={isSubmitting || !selectedTool}>
           {isSubmitting ? "Updating..." : "Update Tool"}
         </Button>

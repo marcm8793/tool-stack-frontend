@@ -137,8 +137,9 @@ const AddToolPage = () => {
     if (!isAdmin) return;
     setIsSubmitting(true);
     try {
+      const { noGithubRepo, ...toolDataWithoutNoGithubRepo } = data;
       const toolData: NewToolData = {
-        ...data,
+        ...toolDataWithoutNoGithubRepo,
         category: doc(
           db,
           "categories",
