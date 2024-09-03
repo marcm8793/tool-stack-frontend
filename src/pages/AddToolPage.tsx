@@ -189,84 +189,90 @@ const AddToolPage = () => {
       <h1 className="text-3xl font-bold mb-6">Add New Tool</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
+          <Label htmlFor="name">Tool Name</Label>
           <Input {...register("name")} placeholder="Tool Name" />
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         </div>
         <div>
+          <Label htmlFor="description">Description</Label>
           <Textarea {...register("description")} placeholder="Description" />
           {errors.description && (
             <p className="text-red-500">{errors.description.message}</p>
           )}
         </div>
-        <div>
-          <Label htmlFor="category">Category</Label>
-          <Controller
-            name="category"
-            control={control}
-            render={({ field }) => (
-              <Select
-                key={field.value}
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem key={category.id} value={category.id}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="category">Category</Label>
+            <Controller
+              name="category"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  key={field.value}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map((category) => (
+                      <SelectItem key={category.id} value={category.id}>
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.category && (
+              <p className="text-red-500">{errors.category.message}</p>
             )}
-          />
-          {errors.category && (
-            <p className="text-red-500">{errors.category.message}</p>
-          )}
-        </div>
-        <div>
-          <Label htmlFor="ecosystem">Ecosystem</Label>
-          <Controller
-            name="ecosystem"
-            control={control}
-            render={({ field }) => (
-              <Select
-                key={field.value}
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select an ecosystem" />
-                </SelectTrigger>
-                <SelectContent>
-                  {ecosystems.map((ecosystem) => (
-                    <SelectItem key={ecosystem.id} value={ecosystem.id}>
-                      {ecosystem.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+          </div>
+          <div>
+            <Label htmlFor="ecosystem">Ecosystem</Label>
+            <Controller
+              name="ecosystem"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  key={field.value}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an ecosystem" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ecosystems.map((ecosystem) => (
+                      <SelectItem key={ecosystem.id} value={ecosystem.id}>
+                        {ecosystem.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.ecosystem && (
+              <p className="text-red-500">{errors.ecosystem.message}</p>
             )}
-          />
-          {errors.ecosystem && (
-            <p className="text-red-500">{errors.ecosystem.message}</p>
-          )}
+          </div>
         </div>
-
-        <div>
-          <Input {...register("website_url")} placeholder="Website URL" />
-          {errors.website_url && (
-            <p className="text-red-500">{errors.website_url.message}</p>
-          )}
-        </div>
-        <div>
-          <Label htmlFor="logo_url">Logo URL</Label>
-          <Input {...register("logo_url")} placeholder="Logo URL" />
-          {errors.logo_url && (
-            <p className="text-red-500">{errors.logo_url.message}</p>
-          )}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="website_url">Website URL</Label>
+            <Input {...register("website_url")} placeholder="Website URL" />
+            {errors.website_url && (
+              <p className="text-red-500">{errors.website_url.message}</p>
+            )}
+          </div>
+          <div>
+            <Label htmlFor="logo_url">Logo URL</Label>
+            <Input {...register("logo_url")} placeholder="Logo URL" />
+            {errors.logo_url && (
+              <p className="text-red-500">{errors.logo_url.message}</p>
+            )}
+          </div>
         </div>
         <div className="flex items-center space-x-2">
           <Controller
@@ -289,14 +295,16 @@ const AddToolPage = () => {
           <Label htmlFor="noGithubRepo">No GitHub repo</Label>
         </div>
         {!noGithubRepo && (
-          <>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div>
+              <Label htmlFor="github_link">GitHub Link</Label>
               <Input {...register("github_link")} placeholder="GitHub Link" />
               {errors.github_link && (
                 <p className="text-red-500">{errors.github_link.message}</p>
               )}
             </div>
             <div>
+              <Label htmlFor="github_stars">GitHub Stars</Label>
               <Controller
                 name="github_stars"
                 control={control}
@@ -317,7 +325,7 @@ const AddToolPage = () => {
                 <p className="text-red-500">{errors.github_stars.message}</p>
               )}
             </div>
-          </>
+          </div>
         )}
         <div>
           <Label htmlFor="badges">Badges</Label>
