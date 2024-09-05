@@ -186,7 +186,7 @@ const SearchBar: React.FC = () => {
                       to={`/tools/${result.id}`}
                       className={`p-2 hover:bg-gray-200 dark:text-white dark:bg-transparent dark:hover:bg-gray-800 flex justify-between items-center ${
                         index === selectedIndex
-                          ? "bg-gray-100 dark:bg-gray-700"
+                          ? "bg-gray-100 dark:bg-gray-600"
                           : ""
                       }`}
                       onClick={() => {
