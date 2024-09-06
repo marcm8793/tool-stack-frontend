@@ -84,7 +84,6 @@ const SearchBar: React.FC = () => {
       case "Enter":
         event.preventDefault();
         if (selectedIndex >= 0) {
-          console.log("Navigating to:", `/tools/${results[selectedIndex].id}`);
           navigate(`/tools/${results[selectedIndex].id}`);
           setIsOpen(false);
           handleReset();
