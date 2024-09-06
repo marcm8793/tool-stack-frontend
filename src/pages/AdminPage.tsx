@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddCategoryForm from "@/components/admin/AddCategoryForm";
 import AddEcosystemForm from "@/components/admin/AddEcosystemForm";
 import ManageToolsForm from "@/components/admin/ManageToolsForm";
+import OverviewDashboard from "@/components/admin/OverviewDashboard";
 
 const AdminPage = () => {
   const { isAdmin, loading } = useAdminAccess();
@@ -36,7 +37,7 @@ const AdminPage = () => {
         </TabsContent>
         <TabsContent value="overview">
           <h2 className="text-2xl font-semibold mb-4">Overview</h2>
-          {/* Add overview content here */}
+          <OverviewDashboard />
         </TabsContent>
         <TabsContent value="tools">
           <h2 className="text-2xl font-semibold mb-4">Tools Management</h2>
