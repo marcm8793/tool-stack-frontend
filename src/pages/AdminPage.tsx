@@ -28,6 +28,8 @@ const AdminPage = () => {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="tools">Tools</TabsTrigger>
           <TabsTrigger value="users">Users</TabsTrigger>
+          <TabsTrigger value="categories">Categories</TabsTrigger>
+          <TabsTrigger value="ecosystems">Ecosystems</TabsTrigger>
         </TabsList>
         <TabsContent value="tools">
           <ManageToolsForm />
@@ -45,19 +47,25 @@ const AdminPage = () => {
                 Add New Tool
               </Button>
             </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Add New Category</h3>
-              <AddCategoryForm />
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Add New Ecosystem</h3>
-              <AddEcosystemForm />
-            </div>
           </div>
         </TabsContent>
         <TabsContent value="users">
           <h2 className="text-2xl font-semibold mb-4">User Management</h2>
           {/* Add user management content here */}
+        </TabsContent>
+        <TabsContent value="categories">
+          <h2 className="text-2xl font-semibold mb-4">Categories Management</h2>
+          <div className="max-w-md mx-auto">
+            <h3 className="text-xl font-semibold mb-2">Add New Category</h3>
+            <AddCategoryForm />
+          </div>
+        </TabsContent>
+        <TabsContent value="ecosystems">
+          <h2 className="text-2xl font-semibold mb-4">Ecosystems Management</h2>
+          <div className="max-w-md mx-auto">
+            <h3 className="text-xl font-semibold mb-2">Add New Ecosystem</h3>
+            <AddEcosystemForm />
+          </div>
         </TabsContent>
       </Tabs>
     </div>

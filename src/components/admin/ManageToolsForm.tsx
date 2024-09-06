@@ -34,22 +34,41 @@ import {
 import { Badge } from "../ui/badge";
 import { X } from "lucide-react";
 import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
 
-const toolSchema = z.object({
-  id: z.string().min(1, "Tool ID is required"),
-  name: z.string().min(1, "Name is required"),
-  description: z.string().min(10, "Description must be at least 10 characters"),
-  category: z.string().min(1, "Category is required"),
-  ecosystem: z.string().min(1, "Ecosystem is required"),
-  github_link: z.string().url("Must be a valid URL"),
-  website_url: z.string().url("Must be a valid URL"),
-  logo_url: z.string().url("Must be a valid URL"),
-  github_stars: z
-    .number()
-    .int()
-    .nonnegative("GitHub stars must be a non-negative integer"),
-  badges: z.array(z.string()),
-});
+const toolSchema = z
+  .object({
+    id: z.string().min(1, "Tool ID is required"),
+    name: z.string().min(1, "Name is required"),
+    description: z
+      .string()
+      .min(10, "Description must be at least 10 characters"),
+    category: z.string().min(1, "Category is required"),
+    ecosystem: z.string().min(1, "Ecosystem is required"),
+    noGithubRepo: z.boolean(),
+    github_link: z.string().url("Must be a valid URL").nullable(),
+    website_url: z.string().url("Must be a valid URL"),
+    logo_url: z.string().url("Must be a valid URL"),
+    github_stars: z
+      .number()
+      .int()
+      .nonnegative("GitHub stars must be a non-negative integer")
+      .nullable(),
+    badges: z.array(z.string()),
+  })
+  .refine(
+    (data) => {
+      if (data.noGithubRepo) {
+        return data.github_link === null && data.github_stars === null;
+      }
+      return data.github_link !== null && data.github_stars !== null;
+    },
+    {
+      message:
+        "GitHub link and stars are required if 'No GitHub repo' is not checked",
+      path: ["github_link", "github_stars"],
+    }
+  );
 
 type ToolFormData = z.infer<typeof toolSchema>;
 
@@ -69,10 +88,18 @@ const ManageToolsForm = () => {
     reset,
     setValue,
     watch,
+    trigger,
     formState: { errors },
   } = useForm<ToolFormData>({
     resolver: zodResolver(toolSchema),
+    defaultValues: {
+      noGithubRepo: false,
+      github_link: null,
+      github_stars: null,
+    },
   });
+
+  const noGithubRepo = watch("noGithubRepo");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -143,12 +170,15 @@ const ManageToolsForm = () => {
         newLogoUrl = await getDownloadURL(newLogoRef);
       }
 
+      const { noGithubRepo, id, ...dataToUpdate } = data;
+
       await updateDoc(toolRef, {
-        ...data,
+        ...dataToUpdate,
         logo_url: newLogoUrl,
         category: doc(db, "categories", data.category),
         ecosystem: doc(db, "ecosystems", data.ecosystem),
-        github_stars: Number(data.github_stars),
+        github_link: data.noGithubRepo ? null : data.github_link,
+        github_stars: data.noGithubRepo ? null : Number(data.github_stars),
       });
 
       toast({
@@ -173,12 +203,15 @@ const ManageToolsForm = () => {
     const selectedTool = tools.find((tool) => tool.id === toolId);
     if (selectedTool) {
       setSelectedTool(toolId);
+      const noGithubRepo =
+        !selectedTool.github_link && selectedTool.github_stars === null;
       reset({
         ...selectedTool,
         category: selectedTool.category.id,
         ecosystem: selectedTool.ecosystem.id,
-        github_link: selectedTool.github_link || "N/A",
-        github_stars: selectedTool.github_stars || undefined,
+        noGithubRepo,
+        github_link: selectedTool.github_link || null,
+        github_stars: selectedTool.github_stars || null,
         badges: selectedTool.badges || [],
       });
       setNewBadge("");
@@ -315,9 +348,46 @@ const ManageToolsForm = () => {
         {errors.ecosystem && (
           <p className="text-red-500">{errors.ecosystem.message}</p>
         )}
-        <Input {...register("github_link")} placeholder="GitHub Link" />
-        {errors.github_link && (
-          <p className="text-red-500">{errors.github_link.message}</p>
+        <div className="flex items-center space-x-2">
+          <Controller
+            name="noGithubRepo"
+            control={control}
+            render={({ field }) => (
+              <Checkbox
+                id="noGithubRepo"
+                checked={field.value}
+                onCheckedChange={(checked) => {
+                  field.onChange(checked);
+                  if (checked) {
+                    setValue("github_link", null);
+                    setValue("github_stars", null);
+                  } else {
+                    trigger(["github_link", "github_stars"]);
+                  }
+                }}
+              />
+            )}
+          />
+          <Label htmlFor="noGithubRepo">No GitHub repo</Label>
+        </div>
+        {!noGithubRepo && (
+          <>
+            <Input {...register("github_link")} placeholder="GitHub Link" />
+            {errors.github_link && (
+              <p className="text-red-500">{errors.github_link.message}</p>
+            )}
+            <Input
+              {...register("github_stars", {
+                setValueAs: (v) => (v === "" ? null : parseInt(v, 10)),
+                valueAsNumber: true,
+              })}
+              type="number"
+              placeholder="GitHub Stars"
+            />
+            {errors.github_stars && (
+              <p className="text-red-500">{errors.github_stars.message}</p>
+            )}
+          </>
         )}
         <Input {...register("website_url")} placeholder="Website URL" />
         {errors.website_url && (
@@ -326,14 +396,6 @@ const ManageToolsForm = () => {
         <Input {...register("logo_url")} placeholder="Logo URL" />
         {errors.logo_url && (
           <p className="text-red-500">{errors.logo_url.message}</p>
-        )}
-        <Input
-          {...register("github_stars", { valueAsNumber: true })}
-          type="number"
-          placeholder="GitHub Stars"
-        />
-        {errors.github_stars && (
-          <p className="text-red-500">{errors.github_stars.message}</p>
         )}
         <div>
           <Label htmlFor="badges">Badges</Label>
