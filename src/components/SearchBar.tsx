@@ -24,7 +24,7 @@ const SearchBar: React.FC = () => {
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMac, setIsMac] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -105,7 +105,6 @@ const SearchBar: React.FC = () => {
   const handleSearch = async (searchQuery: string) => {
     console.log("Searching for:", searchQuery);
     setQuery(searchQuery);
-    setSelectedIndex(-1);
     if (searchQuery.length > 0) {
       try {
         const searchResults = await typesenseClient
@@ -122,6 +121,7 @@ const SearchBar: React.FC = () => {
         console.log("Search results:", newResults);
         setResults(newResults);
         setIsOpen(true);
+        setSelectedIndex(newResults.length > 0 ? 0 : -1); // Set to 0 if there are results
       } catch (error) {
         console.error("Error searching Typesense:", error);
         setResults([]);
@@ -129,6 +129,7 @@ const SearchBar: React.FC = () => {
     } else {
       setResults([]);
       setIsOpen(false);
+      setSelectedIndex(-1);
     }
   };
 
@@ -166,7 +167,7 @@ const SearchBar: React.FC = () => {
           ref={inputRef}
           type="text"
           placeholder="Search tools..."
-          className="w-full outline-none dark:text-white dark:bg-transparent text-xs md:text-base"
+          className="w-full outline-none dark:text-white dark:bg-transparent text-xs md:text-base focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:rounded-sm"
           value={query}
           onChange={(e) => handleSearch(e.target.value)}
           onFocus={() => {
@@ -192,16 +193,16 @@ const SearchBar: React.FC = () => {
         )}
       </div>
       {isOpen && results.length > 0 && (
-        <div className="absolute w-full mt-1 border rounded-md shadow-lg bg-white dark:bg-gray-800 z-10">
+        <div className="absolute w-full mt-1 border rounded-md shadow-lg bg-white dark:bg-gray-800 z-50">
           <Command className="w-full max-h-[300px] overflow-y-auto">
             <ul>
               {results.map((result, index) => (
                 <li key={result.id} className="border-b last:border-b-0">
                   <Link
                     to={`/tools/${result.id}`}
-                    className={`p-2 hover:bg-gray-200 dark:text-white dark:bg-transparent dark:hover:bg-gray-800 flex justify-between items-center ${
+                    className={`p-2 hover:bg-gray-200 dark:hover:bg-gray-700 flex justify-between items-center ${
                       index === selectedIndex
-                        ? "bg-gray-200 dark:bg-gray-500"
+                        ? "bg-gray-200 dark:bg-gray-600 text-black dark:text-white"
                         : ""
                     }`}
                     onClick={() => {
