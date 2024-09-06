@@ -62,40 +62,50 @@ const SearchBar: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (!isOpen) return;
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log("Key pressed:", event.key);
+    console.log("isOpen:", isOpen);
+    console.log("results.length:", results.length);
+    console.log("selectedIndex:", selectedIndex);
 
-      switch (event.key) {
-        case "ArrowDown":
-          event.preventDefault();
-          setSelectedIndex((prevIndex) =>
-            prevIndex < results.length - 1 ? prevIndex + 1 : prevIndex
-          );
-          break;
-        case "ArrowUp":
-          event.preventDefault();
-          setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : -1));
-          break;
-        case "Enter":
-          event.preventDefault();
-          if (selectedIndex >= 0 && selectedIndex < results.length) {
-            navigate(`/tools/${results[selectedIndex].id}`);
-            setIsOpen(false);
-            handleReset();
-          }
-          break;
-      }
-    };
+    if (!isOpen || results.length === 0) return;
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, results, selectedIndex, navigate]);
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        console.log("ArrowDown pressed");
+        setSelectedIndex((prevIndex) => {
+          const newIndex = prevIndex < results.length - 1 ? prevIndex + 1 : 0;
+          console.log("New selectedIndex:", newIndex);
+          return newIndex;
+        });
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        console.log("ArrowUp pressed");
+        setSelectedIndex((prevIndex) => {
+          const newIndex = prevIndex > 0 ? prevIndex - 1 : results.length - 1;
+          console.log("New selectedIndex:", newIndex);
+          return newIndex;
+        });
+        break;
+      case "Enter":
+        event.preventDefault();
+        console.log("Enter pressed");
+        if (selectedIndex >= 0) {
+          console.log("Navigating to:", `/tools/${results[selectedIndex].id}`);
+          navigate(`/tools/${results[selectedIndex].id}`);
+          setIsOpen(false);
+          handleReset();
+        }
+        break;
+    }
+  };
 
   const handleSearch = async (searchQuery: string) => {
+    console.log("Searching for:", searchQuery);
     setQuery(searchQuery);
+    setSelectedIndex(-1);
     if (searchQuery.length > 0) {
       try {
         const searchResults = await typesenseClient
@@ -109,19 +119,25 @@ const SearchBar: React.FC = () => {
         const newResults =
           searchResults.hits?.map((hit) => hit.document as DevTool) || [];
 
+        console.log("Search results:", newResults);
         setResults(newResults);
+        setIsOpen(true);
       } catch (error) {
         console.error("Error searching Typesense:", error);
         setResults([]);
       }
     } else {
       setResults([]);
+      setIsOpen(false);
     }
   };
 
   const handleReset = () => {
+    console.log("Resetting search");
     setQuery("");
     setResults([]);
+    setSelectedIndex(-1);
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -141,7 +157,10 @@ const SearchBar: React.FC = () => {
     <div className="relative w-64 h-9" ref={searchRef}>
       <div
         className="flex items-center border rounded-md p-2 cursor-text space-x-2 h-full"
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          console.log("Search bar clicked");
+          inputRef.current?.focus();
+        }}
       >
         <input
           ref={inputRef}
@@ -150,8 +169,13 @@ const SearchBar: React.FC = () => {
           className="w-full outline-none dark:text-white dark:bg-transparent text-xs md:text-base"
           value={query}
           onChange={(e) => handleSearch(e.target.value)}
-          onFocus={() => setIsOpen(true)}
+          onFocus={() => {
+            console.log("Input focused");
+            setIsOpen(true);
+          }}
+          onKeyDown={handleKeyDown}
         />
+
         {query ? (
           <X
             className="h-4 w-4 text-gray-500 cursor-pointer flex-shrink-0"
@@ -167,40 +191,30 @@ const SearchBar: React.FC = () => {
           </div>
         )}
       </div>
-      {isOpen && (
+      {isOpen && results.length > 0 && (
         <div className="absolute w-full mt-1 border rounded-md shadow-lg bg-white dark:bg-gray-800 z-10">
           <Command className="w-full max-h-[300px] overflow-y-auto">
-            {results.length === 0 && query === "" ? (
-              <div className="p-2 text-sm text-gray-500 dark:text-white dark:bg-transparent">
-                Start typing to search...
-              </div>
-            ) : results.length === 0 ? (
-              <div className="p-2 text-sm text-gray-500 dark:text-white dark:bg-transparent">
-                No results found.
-              </div>
-            ) : (
-              <ul>
-                {results.map((result, index) => (
-                  <li key={result.id} className="border-b last:border-b-0">
-                    <Link
-                      to={`/tools/${result.id}`}
-                      className={`p-2 hover:bg-gray-200 dark:text-white dark:bg-transparent dark:hover:bg-gray-800 flex justify-between items-center ${
-                        index === selectedIndex
-                          ? "bg-gray-200 dark:bg-gray-600"
-                          : ""
-                      }`}
-                      onClick={() => {
-                        setIsOpen(false);
-                        handleReset();
-                      }}
-                    >
-                      <div className="font-medium">{result.name}</div>
-                      <LinkIcon className="h-4 w-4 text-gray-500 flex-shrink-0" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <ul>
+              {results.map((result, index) => (
+                <li key={result.id} className="border-b last:border-b-0">
+                  <Link
+                    to={`/tools/${result.id}`}
+                    className={`p-2 hover:bg-gray-200 dark:text-white dark:bg-transparent dark:hover:bg-gray-800 flex justify-between items-center ${
+                      index === selectedIndex
+                        ? "bg-gray-200 dark:bg-gray-500"
+                        : ""
+                    }`}
+                    onClick={() => {
+                      console.log("Result clicked:", result.name);
+                      handleReset();
+                    }}
+                  >
+                    <div className="font-medium">{result.name}</div>
+                    <LinkIcon className="h-4 w-4 text-gray-500 flex-shrink-0" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </Command>
         </div>
       )}
