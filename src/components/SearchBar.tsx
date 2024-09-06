@@ -3,7 +3,7 @@ import Typesense from "typesense";
 import { DevTool } from "@/types";
 import { Link, useNavigate } from "react-router-dom";
 import { Command } from "./ui/command";
-import { CommandIcon, LinkIcon, SquareChevronUp, X } from "lucide-react";
+import { CommandIcon, LinkIcon, X } from "lucide-react";
 
 const typesenseClient = new Typesense.Client({
   nodes: [
@@ -63,26 +63,18 @@ const SearchBar: React.FC = () => {
   }, []);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log("Key pressed:", event.key);
-    console.log("isOpen:", isOpen);
-    console.log("results.length:", results.length);
-    console.log("selectedIndex:", selectedIndex);
-
     if (!isOpen || results.length === 0) return;
 
     switch (event.key) {
       case "ArrowDown":
         event.preventDefault();
-        console.log("ArrowDown pressed");
         setSelectedIndex((prevIndex) => {
           const newIndex = prevIndex < results.length - 1 ? prevIndex + 1 : 0;
-          console.log("New selectedIndex:", newIndex);
           return newIndex;
         });
         break;
       case "ArrowUp":
         event.preventDefault();
-        console.log("ArrowUp pressed");
         setSelectedIndex((prevIndex) => {
           const newIndex = prevIndex > 0 ? prevIndex - 1 : results.length - 1;
           console.log("New selectedIndex:", newIndex);
@@ -91,7 +83,6 @@ const SearchBar: React.FC = () => {
         break;
       case "Enter":
         event.preventDefault();
-        console.log("Enter pressed");
         if (selectedIndex >= 0) {
           console.log("Navigating to:", `/tools/${results[selectedIndex].id}`);
           navigate(`/tools/${results[selectedIndex].id}`);
@@ -103,7 +94,6 @@ const SearchBar: React.FC = () => {
   };
 
   const handleSearch = async (searchQuery: string) => {
-    console.log("Searching for:", searchQuery);
     setQuery(searchQuery);
     if (searchQuery.length > 0) {
       try {
@@ -118,7 +108,6 @@ const SearchBar: React.FC = () => {
         const newResults =
           searchResults.hits?.map((hit) => hit.document as DevTool) || [];
 
-        console.log("Search results:", newResults);
         setResults(newResults);
         setIsOpen(true);
         setSelectedIndex(newResults.length > 0 ? 0 : -1); // Set to 0 if there are results
@@ -134,7 +123,6 @@ const SearchBar: React.FC = () => {
   };
 
   const handleReset = () => {
-    console.log("Resetting search");
     setQuery("");
     setResults([]);
     setSelectedIndex(-1);
@@ -159,7 +147,6 @@ const SearchBar: React.FC = () => {
       <div
         className="flex items-center border rounded-md p-2 cursor-text space-x-2 h-full"
         onClick={() => {
-          console.log("Search bar clicked");
           inputRef.current?.focus();
         }}
       >
@@ -171,7 +158,6 @@ const SearchBar: React.FC = () => {
           value={query}
           onChange={(e) => handleSearch(e.target.value)}
           onFocus={() => {
-            console.log("Input focused");
             setIsOpen(true);
           }}
           onKeyDown={handleKeyDown}
@@ -187,7 +173,7 @@ const SearchBar: React.FC = () => {
           />
         ) : (
           <div className="flex items-center justify-center text-gray-500 text-sm">
-            {isMac ? <CommandIcon size={14} /> : <SquareChevronUp size={14} />}
+            {isMac ? <CommandIcon size={14} /> : <span>Ctrl +</span>}
             <span className="ml-1">K</span>
           </div>
         )}
