@@ -13,6 +13,7 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { auth } from "@/lib/firebase";
 import { useNavigate } from "react-router-dom";
+import { toast } from "../ui/use-toast";
 
 export function UserNav() {
   const { user } = useAuth();
@@ -21,8 +22,17 @@ export function UserNav() {
   const handleLogout = async () => {
     try {
       await auth.signOut();
+      toast({
+        title: "Success",
+        description: "You have successfully logged out.",
+      });
     } catch (error) {
       console.error("Error signing out:", error);
+      toast({
+        title: "Error",
+        description: "Failed to sign out. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
