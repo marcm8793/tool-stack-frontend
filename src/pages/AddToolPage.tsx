@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
+import OpenAI from "openai";
 
 const toolSchema = z
   .object({
@@ -72,6 +73,7 @@ const AddToolPage = () => {
   const [newBadge, setNewBadge] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [ecosystems, setEcosystems] = useState<EcoSystem[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   useEffect(() => {
     const fetchCategoriesAndEcosystems = async () => {
@@ -115,20 +117,101 @@ const AddToolPage = () => {
     },
   });
 
+  // Initialize OpenAI client
+  const openai = new OpenAI({
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+    dangerouslyAllowBrowser: true,
+  });
+
+  const generateAIContent = useCallback(async () => {
+    const websiteUrl = watch("website_url");
+    if (!websiteUrl) {
+      toast({
+        title: "Error",
+        description: "Please enter a website URL first.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are a web developer that analyzes developer tools and provides descriptions and relevant tags for each tool. Always format your response with '### Description:' followed by the description, and '### Tags:' followed by a numbered list of tags.",
+          },
+          {
+            role: "user",
+            content: `Analyze the developer tool at ${websiteUrl}. Provide a long and precise description and 4 relevant tags or keywords. Format your response as instructed.`,
+          },
+        ],
+      });
+
+      const aiResponse = response.choices[0].message.content;
+      console.log("AI Response:", aiResponse);
+
+      // Extract description and tags
+      const descriptionMatch = aiResponse?.match(
+        /### Description:([\s\S]*?)(?=### Tags:|$)/i
+      );
+      const tagsMatch = aiResponse?.match(/### Tags:([\s\S]*)/i);
+
+      const description = descriptionMatch ? descriptionMatch[1].trim() : "";
+      const tags = tagsMatch
+        ? tagsMatch[1]
+            .split(/\n/)
+            .map((tag) => tag.replace(/^\d+\.\s*/, "").trim())
+            .filter((tag) => tag !== "")
+        : [];
+
+      console.log("Extracted Description:", description);
+      console.log("Extracted Tags:", tags);
+
+      if (description) {
+        setValue("description", description);
+      }
+      if (tags.length > 0) {
+        setNewBadge(tags.join(", ")); // Put tags in the input field
+      }
+
+      toast({
+        title: "Success",
+        description:
+          "AI-generated content added successfully. Review the description and suggested badges.",
+      });
+    } catch (error) {
+      console.error("Error generating AI content:", error);
+      toast({
+        title: "Error",
+        description: "Failed to generate AI content. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  }, [watch, toast, openai.chat.completions, setValue, setNewBadge]);
+
   const badges = watch("badges");
 
+  // Modify the addBadge function to handle multiple badges
   const addBadge = () => {
-    if (newBadge.trim() !== "" && !badges.includes(newBadge.trim())) {
-      setValue("badges", [...badges, newBadge.trim()]);
+    const badgesToAdd = newBadge
+      .split(",")
+      .map((badge) => badge.trim())
+      .filter((badge) => badge !== "");
+    if (badgesToAdd.length > 0) {
+      setValue("badges", [...watch("badges"), ...badgesToAdd]);
       setNewBadge("");
     }
   };
 
   const removeBadge = (badge: string) => {
-    setValue(
-      "badges",
-      badges.filter((b) => b !== badge)
-    );
+    const newBadges = badges.filter((b) => b !== badge);
+    setValue("badges", newBadges);
   };
 
   const noGithubRepo = watch("noGithubRepo");
@@ -193,13 +276,7 @@ const AddToolPage = () => {
           <Input {...register("name")} placeholder="Tool Name" />
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         </div>
-        <div>
-          <Label htmlFor="description">Description</Label>
-          <Textarea {...register("description")} placeholder="Description" />
-          {errors.description && (
-            <p className="text-red-500">{errors.description.message}</p>
-          )}
-        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="category">Category</Label>
@@ -258,22 +335,7 @@ const AddToolPage = () => {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="website_url">Website URL</Label>
-            <Input {...register("website_url")} placeholder="Website URL" />
-            {errors.website_url && (
-              <p className="text-red-500">{errors.website_url.message}</p>
-            )}
-          </div>
-          <div>
-            <Label htmlFor="logo_url">Logo URL</Label>
-            <Input {...register("logo_url")} placeholder="Logo URL" />
-            {errors.logo_url && (
-              <p className="text-red-500">{errors.logo_url.message}</p>
-            )}
-          </div>
-        </div>
+
         <div className="flex items-center space-x-2">
           <Controller
             name="noGithubRepo"
@@ -328,40 +390,76 @@ const AddToolPage = () => {
           </div>
         )}
         <div>
+          <Label htmlFor="logo_url">Logo URL</Label>
+          <Input {...register("logo_url")} placeholder="Logo URL" />
+          {errors.logo_url && (
+            <p className="text-red-500">{errors.logo_url.message}</p>
+          )}
+        </div>
+        <div className="flex flex-col space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-end space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="flex-grow">
+              <Label htmlFor="website_url">Website URL</Label>
+              <Input {...register("website_url")} placeholder="Website URL" />
+              {errors.website_url && (
+                <p className="text-red-500">{errors.website_url.message}</p>
+              )}
+            </div>
+            <div className="sm:flex-shrink-0">
+              <Button
+                type="button"
+                onClick={generateAIContent}
+                disabled={isGenerating || !watch("website_url")}
+                className="w-full sm:w-auto"
+              >
+                {isGenerating ? "Generating..." : "AI Generate"}
+              </Button>
+            </div>
+          </div>
+          <div>
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              {...register("description")}
+              placeholder="Description"
+              className="h-64"
+            />
+            {errors.description && (
+              <p className="text-red-500">{errors.description.message}</p>
+            )}
+          </div>
+        </div>
+        <div>
           <Label htmlFor="badges">Badges</Label>
-          <div className="flex items-center space-x-2 mb-2">
+
+          <div className="flex items-center space-x-2 mt-2">
             <Input
               id="newBadge"
               value={newBadge}
               onChange={(e) => setNewBadge(e.target.value)}
-              placeholder="Enter a badge"
+              placeholder="Enter badges (comma-separated)"
             />
             <Button type="button" onClick={addBadge}>
-              Add Badge
+              Add Badges
             </Button>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <Controller
-              name="badges"
-              control={control}
-              render={({ field }) => (
-                <>
-                  {field.value.map((badge, index) => (
-                    <Badge
-                      key={index}
-                      variant="secondary"
-                      className="flex items-center"
-                    >
-                      {badge}
-                      <X
-                        className="ml-1 h-3 w-3 cursor-pointer"
-                        onClick={() => removeBadge(badge)}
-                      />
-                    </Badge>
-                  ))}
-                </>
-              )}
-            />
+          <p className="text-sm text-gray-500 mt-1">
+            AI-suggested badges will appear here. Review and click 'Add Badges'
+            to confirm.
+          </p>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {watch("badges").map((badge, index) => (
+              <Badge
+                key={index}
+                variant="secondary"
+                className="flex items-center"
+              >
+                {badge}
+                <X
+                  className="ml-1 h-3 w-3 cursor-pointer"
+                  onClick={() => removeBadge(badge)}
+                />
+              </Badge>
+            ))}
           </div>
         </div>
         <Button type="submit" disabled={isSubmitting}>
