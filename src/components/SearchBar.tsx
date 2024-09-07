@@ -77,7 +77,6 @@ const SearchBar: React.FC = () => {
         event.preventDefault();
         setSelectedIndex((prevIndex) => {
           const newIndex = prevIndex > 0 ? prevIndex - 1 : results.length - 1;
-          console.log("New selectedIndex:", newIndex);
           return newIndex;
         });
         break;
@@ -172,8 +171,11 @@ const SearchBar: React.FC = () => {
           />
         ) : (
           <div className="flex items-center justify-center text-gray-500 text-sm">
-            {isMac ? <CommandIcon size={14} /> : <span>Ctrl +</span>}
-            <span className="ml-1">K</span>
+            {isMac ? (
+              <CommandIcon size={14} />
+            ) : (
+              <span className="whitespace-nowrap">Ctrl + K</span>
+            )}
           </div>
         )}
       </div>
@@ -191,7 +193,6 @@ const SearchBar: React.FC = () => {
                         : ""
                     }`}
                     onClick={() => {
-                      console.log("Result clicked:", result.name);
                       handleReset();
                     }}
                   >
