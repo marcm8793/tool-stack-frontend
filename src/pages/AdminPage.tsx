@@ -33,15 +33,8 @@ const AdminPage = () => {
           <TabsTrigger value="ecosystems">Ecosystems</TabsTrigger>
         </TabsList>
         <TabsContent value="tools">
-          <ManageToolsForm />
-        </TabsContent>
-        <TabsContent value="overview">
-          <h2 className="text-2xl font-semibold mb-4">Overview</h2>
-          <OverviewDashboard />
-        </TabsContent>
-        <TabsContent value="tools">
           <h2 className="text-2xl font-semibold mb-4">Tools Management</h2>
-          <div className="space-y-6">
+          <div className="space-y-6 pb-6">
             <div>
               <h3 className="text-xl font-semibold mb-2">Add New Tool</h3>
               <Button onClick={() => navigate("/admin/add-tool")}>
@@ -49,7 +42,13 @@ const AdminPage = () => {
               </Button>
             </div>
           </div>
+          <ManageToolsForm />
         </TabsContent>
+        <TabsContent value="overview">
+          <h2 className="text-2xl font-semibold mb-4">Overview</h2>
+          <OverviewDashboard />
+        </TabsContent>
+
         <TabsContent value="users">
           <h2 className="text-2xl font-semibold mb-4">User Management</h2>
           {/* Add user management content here */}

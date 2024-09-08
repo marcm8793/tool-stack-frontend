@@ -284,169 +284,174 @@ const ManageToolsForm = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <Select onValueChange={handleToolSelect}>
-        <SelectTrigger>
-          <SelectValue placeholder="Select a tool to edit" />
-        </SelectTrigger>
-        <SelectContent>
-          {tools.map((tool) => (
-            <SelectItem key={tool.id} value={tool.id}>
-              {tool.name}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+    <>
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold mb-4">Edit Tool</h2>
+      </div>
+      <div className="space-y-4">
+        <Select onValueChange={handleToolSelect}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select a tool to edit" />
+          </SelectTrigger>
+          <SelectContent>
+            {tools.map((tool) => (
+              <SelectItem key={tool.id} value={tool.id}>
+                {tool.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <Input {...register("id")} placeholder="Tool ID" disabled />
-        <Input {...register("name")} placeholder="Tool Name" />
-        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
-        <Textarea {...register("description")} placeholder="Description" />
-        {errors.description && (
-          <p className="text-red-500">{errors.description.message}</p>
-        )}
-        <Controller
-          name="category"
-          control={control}
-          render={({ field }) => (
-            <Select onValueChange={field.onChange} value={field.value}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a category" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((category) => (
-                  <SelectItem key={category.id} value={category.id}>
-                    {category.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <Input {...register("id")} placeholder="Tool ID" disabled />
+          <Input {...register("name")} placeholder="Tool Name" />
+          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+          <Textarea {...register("description")} placeholder="Description" />
+          {errors.description && (
+            <p className="text-red-500">{errors.description.message}</p>
           )}
-        />
-        {errors.category && (
-          <p className="text-red-500">{errors.category.message}</p>
-        )}
-        <Controller
-          name="ecosystem"
-          control={control}
-          render={({ field }) => (
-            <Select onValueChange={field.onChange} value={field.value}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select an ecosystem" />
-              </SelectTrigger>
-              <SelectContent>
-                {ecosystems.map((ecosystem) => (
-                  <SelectItem key={ecosystem.id} value={ecosystem.id}>
-                    {ecosystem.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
-        />
-        {errors.ecosystem && (
-          <p className="text-red-500">{errors.ecosystem.message}</p>
-        )}
-        <div className="flex items-center space-x-2">
           <Controller
-            name="noGithubRepo"
+            name="category"
             control={control}
             render={({ field }) => (
-              <Checkbox
-                id="noGithubRepo"
-                checked={field.value}
-                onCheckedChange={(checked) => {
-                  field.onChange(checked);
-                  if (checked) {
-                    setValue("github_link", null);
-                    setValue("github_stars", null);
-                  } else {
-                    trigger(["github_link", "github_stars"]);
-                  }
-                }}
-              />
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem key={category.id} value={category.id}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             )}
           />
-          <Label htmlFor="noGithubRepo">No GitHub repo</Label>
-        </div>
-        {!noGithubRepo && (
-          <>
-            <Input {...register("github_link")} placeholder="GitHub Link" />
-            {errors.github_link && (
-              <p className="text-red-500">{errors.github_link.message}</p>
+          {errors.category && (
+            <p className="text-red-500">{errors.category.message}</p>
+          )}
+          <Controller
+            name="ecosystem"
+            control={control}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select an ecosystem" />
+                </SelectTrigger>
+                <SelectContent>
+                  {ecosystems.map((ecosystem) => (
+                    <SelectItem key={ecosystem.id} value={ecosystem.id}>
+                      {ecosystem.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             )}
-            <Input
-              {...register("github_stars", {
-                setValueAs: (v) => (v === "" ? null : parseInt(v, 10)),
-                valueAsNumber: true,
-              })}
-              type="number"
-              placeholder="GitHub Stars"
-            />
-            {errors.github_stars && (
-              <p className="text-red-500">{errors.github_stars.message}</p>
-            )}
-          </>
-        )}
-        <Input {...register("website_url")} placeholder="Website URL" />
-        {errors.website_url && (
-          <p className="text-red-500">{errors.website_url.message}</p>
-        )}
-        <Input {...register("logo_url")} placeholder="Logo URL" />
-        {errors.logo_url && (
-          <p className="text-red-500">{errors.logo_url.message}</p>
-        )}
-        <div>
-          <Label htmlFor="badges">Badges</Label>
-          <div className="flex items-center space-x-2 mb-2">
-            <Input
-              id="newBadge"
-              value={newBadge}
-              onChange={(e) => setNewBadge(e.target.value)}
-              placeholder="Enter a badge"
-            />
-            <Button type="button" onClick={addBadge}>
-              Add Badge
-            </Button>
-          </div>
-          <div className="flex flex-wrap gap-2">
+          />
+          {errors.ecosystem && (
+            <p className="text-red-500">{errors.ecosystem.message}</p>
+          )}
+          <div className="flex items-center space-x-2">
             <Controller
-              name="badges"
+              name="noGithubRepo"
               control={control}
               render={({ field }) => (
-                <>
-                  {field.value?.map((badge, index) => (
-                    <Badge
-                      key={index}
-                      variant="secondary"
-                      className="flex items-center"
-                    >
-                      {badge}
-                      <X
-                        className="ml-1 h-3 w-3 cursor-pointer"
-                        onClick={() => removeBadge(badge)}
-                      />
-                    </Badge>
-                  ))}
-                </>
+                <Checkbox
+                  id="noGithubRepo"
+                  checked={field.value}
+                  onCheckedChange={(checked) => {
+                    field.onChange(checked);
+                    if (checked) {
+                      setValue("github_link", null);
+                      setValue("github_stars", null);
+                    } else {
+                      trigger(["github_link", "github_stars"]);
+                    }
+                  }}
+                />
               )}
             />
+            <Label htmlFor="noGithubRepo">No GitHub repo</Label>
           </div>
-        </div>
-        <Button type="submit" disabled={isSubmitting || !selectedTool}>
-          {isSubmitting ? "Updating..." : "Update Tool"}
-        </Button>
-      </form>
+          {!noGithubRepo && (
+            <>
+              <Input {...register("github_link")} placeholder="GitHub Link" />
+              {errors.github_link && (
+                <p className="text-red-500">{errors.github_link.message}</p>
+              )}
+              <Input
+                {...register("github_stars", {
+                  setValueAs: (v) => (v === "" ? null : parseInt(v, 10)),
+                  valueAsNumber: true,
+                })}
+                type="number"
+                placeholder="GitHub Stars"
+              />
+              {errors.github_stars && (
+                <p className="text-red-500">{errors.github_stars.message}</p>
+              )}
+            </>
+          )}
+          <Input {...register("website_url")} placeholder="Website URL" />
+          {errors.website_url && (
+            <p className="text-red-500">{errors.website_url.message}</p>
+          )}
+          <Input {...register("logo_url")} placeholder="Logo URL" />
+          {errors.logo_url && (
+            <p className="text-red-500">{errors.logo_url.message}</p>
+          )}
+          <div>
+            <Label htmlFor="badges">Badges</Label>
+            <div className="flex items-center space-x-2 mb-2">
+              <Input
+                id="newBadge"
+                value={newBadge}
+                onChange={(e) => setNewBadge(e.target.value)}
+                placeholder="Enter a badge"
+              />
+              <Button type="button" onClick={addBadge}>
+                Add Badge
+              </Button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Controller
+                name="badges"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    {field.value?.map((badge, index) => (
+                      <Badge
+                        key={index}
+                        variant="secondary"
+                        className="flex items-center"
+                      >
+                        {badge}
+                        <X
+                          className="ml-1 h-3 w-3 cursor-pointer"
+                          onClick={() => removeBadge(badge)}
+                        />
+                      </Badge>
+                    ))}
+                  </>
+                )}
+              />
+            </div>
+          </div>
+          <Button type="submit" disabled={isSubmitting || !selectedTool}>
+            {isSubmitting ? "Updating..." : "Update Tool"}
+          </Button>
+        </form>
 
-      <Button
-        onClick={handleDeleteTool}
-        disabled={isSubmitting || !selectedTool}
-        variant="destructive"
-      >
-        {isSubmitting ? "Deleting..." : "Delete Tool"}
-      </Button>
-    </div>
+        <Button
+          onClick={handleDeleteTool}
+          disabled={isSubmitting || !selectedTool}
+          variant="destructive"
+        >
+          {isSubmitting ? "Deleting..." : "Delete Tool"}
+        </Button>
+      </div>
+    </>
   );
 };
 
