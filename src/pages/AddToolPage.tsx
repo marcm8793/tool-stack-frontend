@@ -176,6 +176,9 @@ const AddToolPage = () => {
       }
       if (tags.length > 0) {
         setNewBadge(tags.join(", ")); // Put tags in the input field
+        // Add dashs between each word in each tag
+        const tagsWithDashes = tags.map((tag) => tag.replace(/ /g, "-"));
+        setValue("badges", tagsWithDashes);
       }
 
       toast({
