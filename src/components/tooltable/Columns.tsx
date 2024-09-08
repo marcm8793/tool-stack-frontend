@@ -110,24 +110,6 @@ export const columns = ({
     },
   },
   {
-    accessorKey: "badges",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Features" />
-    ),
-    cell: ({ row }) => {
-      const badges: string[] = row.getValue("badges");
-      return (
-        <div className="flex space-x-2">
-          {badges.map((badge, index) => (
-            <Badge key={index} variant="secondary">
-              {badge}
-            </Badge>
-          ))}
-        </div>
-      );
-    },
-  },
-  {
     accessorKey: "github_stars",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Github Stars" />
@@ -146,6 +128,25 @@ export const columns = ({
       );
     },
   },
+  {
+    accessorKey: "badges",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Features" />
+    ),
+    cell: ({ row }) => {
+      const badges: string[] = row.getValue("badges");
+      return (
+        <div className="flex space-x-2">
+          {badges.slice(0, 2).map((badge, index) => (
+            <Badge key={index} variant="secondary">
+              {badge}
+            </Badge>
+          ))}
+        </div>
+      );
+    },
+  },
+
   {
     id: "actions",
     cell: ({ row }) => {
