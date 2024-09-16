@@ -33,11 +33,17 @@ const ProfilePage: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [newProfilePic, setNewProfilePic] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    values: {
+      displayName: user?.displayName || "",
+    },
+  });
+
   const { toast } = useToast();
 
   useEffect(() => {
@@ -75,6 +81,7 @@ const ProfilePage: React.FC = () => {
 
     try {
       let photoURL = user.photoURL;
+      let updatedDisplayName = user.displayName;
 
       if (newProfilePic) {
         // Delete the old profile picture
@@ -88,6 +95,23 @@ const ProfilePage: React.FC = () => {
         photoURL = await getDownloadURL(snapshot.ref);
       }
 
+      // Only update display name if it has changed and is not empty
+      if (
+        data.displayName &&
+        data.displayName !== user.displayName &&
+        data.displayName.trim() !== ""
+      ) {
+        updatedDisplayName = data.displayName.trim();
+      } else if (!updatedDisplayName) {
+        // If there's no existing display name and the input is empty, show an error
+        toast({
+          title: "Invalid Display Name",
+          description: "Display name cannot be empty.",
+          variant: "destructive",
+        });
+        return;
+      }
+
       // Update auth profile
       await updateProfile(auth.currentUser!, {
         displayName: data.displayName,
@@ -97,7 +121,7 @@ const ProfilePage: React.FC = () => {
       // Update Firestore document
       const userDocRef = doc(db, "users", user.uid);
       await updateDoc(userDocRef, {
-        displayName: data.displayName,
+        displayName: updatedDisplayName,
         photoURL: photoURL,
       });
 
@@ -179,9 +203,10 @@ const ProfilePage: React.FC = () => {
                 <Label htmlFor="displayName">Display Name</Label>
                 <Input
                   id="displayName"
-                  defaultValue={user.displayName || ""}
                   {...register("displayName", {
                     required: "Display name is required",
+                    validate: (value) =>
+                      value.trim() !== "" || "Display name cannot be empty",
                   })}
                   disabled={!isEditing}
                 />
