@@ -146,7 +146,7 @@ const AddToolPage = () => {
           },
           {
             role: "user",
-            content: `Analyze the developer tool at ${websiteUrl}. Provide a long and precise description and 4 relevant tags or keywords. Format your response as instructed.`,
+            content: `Analyze the developer tool by reading the website URL at${websiteUrl}. Provide a long and precise description and 4 relevant tags or keywords. Format your response as instructed.`,
           },
         ],
       });
