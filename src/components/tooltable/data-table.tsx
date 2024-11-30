@@ -24,13 +24,14 @@ import {
 } from "@/components/ui/table";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
-import { Category, EcoSystem } from "@/types/index";
+import { Category, DevTool, EcoSystem } from "@/types/index";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   categories: Category[];
   ecosystems: EcoSystem[];
+  likedTools: string[];
 }
 
 export function DataTable<TData, TValue>({
@@ -38,6 +39,7 @@ export function DataTable<TData, TValue>({
   data,
   categories,
   ecosystems,
+  likedTools,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -46,9 +48,16 @@ export function DataTable<TData, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [showFavorites, setShowFavorites] = React.useState(false);
+
+  // Filter data based on favorites
+  const filteredData = React.useMemo(() => {
+    if (!showFavorites) return data;
+    return (data as DevTool[]).filter((item) => likedTools.includes(item.id));
+  }, [data, likedTools, showFavorites]);
 
   const table = useReactTable({
-    data,
+    data: filteredData as TData[],
     columns,
     state: {
       sorting,
@@ -75,6 +84,8 @@ export function DataTable<TData, TValue>({
         table={table}
         categories={categories}
         ecosystems={ecosystems}
+        showFavorites={showFavorites}
+        onToggleFavorites={() => setShowFavorites(!showFavorites)}
       />
       <div className="rounded-md border">
         <Table>

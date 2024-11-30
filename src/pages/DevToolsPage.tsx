@@ -180,10 +180,11 @@ const DevTools: React.FC = () => {
         </div>
       </div>
       <DataTable
-        data={state.tools}
+        data={state.tools as DevTool[]}
         columns={updatedColumns}
         categories={state.categories}
         ecosystems={state.ecosystem}
+        likedTools={likedTools}
       />
     </div>
   );
