@@ -146,7 +146,7 @@ const AddToolPage = () => {
           },
           {
             role: "user",
-            content: `Analyze the developer tool by reading the website URL at${websiteUrl}. Provide a long and precise description and 4 relevant tags or keywords. Format your response as instructed.`,
+            content: `Analyze the developer tool by reading the website URL at${websiteUrl}. Provide a long and precise description and 8 relevant tags or keywords. Format your response as instructed. Read the URL before providing the description and tags.`,
           },
         ],
       });
@@ -223,6 +223,7 @@ const AddToolPage = () => {
     if (!isAdmin) return;
     setIsSubmitting(true);
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { noGithubRepo, ...toolDataWithoutNoGithubRepo } = data;
       const toolData: NewToolData = {
         ...toolDataWithoutNoGithubRepo,

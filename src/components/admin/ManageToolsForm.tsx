@@ -170,6 +170,7 @@ const ManageToolsForm = () => {
         newLogoUrl = await getDownloadURL(newLogoRef);
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { noGithubRepo, id, ...dataToUpdate } = data;
 
       await updateDoc(toolRef, {
