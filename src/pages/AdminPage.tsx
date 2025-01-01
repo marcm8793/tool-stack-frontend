@@ -7,6 +7,8 @@ import AddCategoryForm from "@/components/admin/AddCategoryForm";
 import AddEcosystemForm from "@/components/admin/AddEcosystemForm";
 import ManageToolsForm from "@/components/admin/ManageToolsForm";
 import OverviewDashboard from "@/components/admin/OverviewDashboard";
+import ManageEcosystemsForm from "@/components/admin/ManageEcosystemsForm";
+import ManageCategoriesForm from "@/components/admin/ManageCategoriesForm";
 
 const AdminPage = () => {
   const { isAdmin, loading } = useAdminAccess();
@@ -55,16 +57,28 @@ const AdminPage = () => {
         </TabsContent>
         <TabsContent value="categories">
           <h2 className="text-2xl font-semibold mb-4">Categories Management</h2>
-          <div className="max-w-md mx-auto">
-            <h3 className="text-xl font-semibold mb-2">Add New Category</h3>
-            <AddCategoryForm />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Add New Category</h3>
+              <AddCategoryForm />
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Manage Categories</h3>
+              <ManageCategoriesForm />
+            </div>
           </div>
         </TabsContent>
         <TabsContent value="ecosystems">
           <h2 className="text-2xl font-semibold mb-4">Ecosystems Management</h2>
-          <div className="max-w-md mx-auto">
-            <h3 className="text-xl font-semibold mb-2">Add New Ecosystem</h3>
-            <AddEcosystemForm />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Add New Ecosystem</h3>
+              <AddEcosystemForm />
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Manage Ecosystems</h3>
+              <ManageEcosystemsForm />
+            </div>
           </div>
         </TabsContent>
       </Tabs>
