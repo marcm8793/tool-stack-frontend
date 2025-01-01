@@ -137,7 +137,7 @@ const AddToolPage = () => {
     setIsGenerating(true);
     try {
       const response = await openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-4o",
         messages: [
           {
             role: "system",
@@ -146,7 +146,7 @@ const AddToolPage = () => {
           },
           {
             role: "user",
-            content: `Analyze the developer tool by reading the website URL at${websiteUrl}. Provide a long and precise description and 8 relevant tags or keywords. Format your response as instructed. Read the URL before providing the description and tags.`,
+            content: `Analyze the developer tool by reading the website URL at${websiteUrl}. Provide a long and precise description and 10 relevant tags or keywords. Format your response as instructed. Read the URL before providing the description and tags.`,
           },
         ],
       });
