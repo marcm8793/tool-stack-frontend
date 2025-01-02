@@ -86,7 +86,19 @@ export function DataTableFacetedFilter<TData, TValue>({
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent
+        className="w-[200px] p-0"
+        align="start"
+        // Mobile positioning
+        sideOffset={4}
+        style={{
+          position: "fixed",
+          top: "auto",
+          bottom: "auto",
+          maxHeight: "60vh",
+          overflowY: "auto",
+        }}
+      >
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
