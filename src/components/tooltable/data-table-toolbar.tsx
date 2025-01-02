@@ -62,6 +62,7 @@ export function DataTableToolbar<TData>({
                 title="Ecosystem"
                 options={ecosystemOptions}
                 className="h-7 sm:h-8 text-xs sm:text-sm"
+                isEcosystemFilter={true}
               />
             )}
           </div>
@@ -74,9 +75,8 @@ export function DataTableToolbar<TData>({
               onClick={onToggleFavorites}
             >
               <HeartIcon className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-              Favorites
+              Likes
             </Button>
-
             {isFiltered && (
               <Button
                 variant="ghost"

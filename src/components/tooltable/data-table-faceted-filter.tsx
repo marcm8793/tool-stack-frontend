@@ -30,6 +30,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
     icon?: React.ComponentType<{ className?: string }>;
   }[];
   className?: string;
+  isEcosystemFilter?: boolean;
 }
 
 export function DataTableFacetedFilter<TData, TValue>({
@@ -37,6 +38,7 @@ export function DataTableFacetedFilter<TData, TValue>({
   title,
   options,
   className,
+  isEcosystemFilter,
 }: DataTableFacetedFilterProps<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues();
   const selectedValues = new Set(column?.getFilterValue() as string[]);
@@ -87,9 +89,11 @@ export function DataTableFacetedFilter<TData, TValue>({
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-[200px] p-0"
+        className={cn(
+          "w-[200px] p-0",
+          isEcosystemFilter ? "-translate-x-[90px]" : ""
+        )}
         align="start"
-        // Mobile positioning
         sideOffset={4}
         style={{
           position: "fixed",
