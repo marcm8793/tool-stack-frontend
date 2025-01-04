@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -29,6 +29,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
 import OpenAI from "openai";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "@/lib/firebase";
 
 const toolSchema = z
   .object({
@@ -41,7 +43,11 @@ const toolSchema = z
     noGithubRepo: z.boolean(),
     github_link: z.string().url("Must be a valid URL").nullable(),
     website_url: z.string().url("Must be a valid URL"),
-    logo_url: z.string().url("Must be a valid URL"),
+    logo_image: z
+      .any()
+      .refine((file) => file && file.type.startsWith("image/"), {
+        message: "Please upload a valid image file",
+      }),
     github_stars: z
       .number()
       .int()
@@ -74,6 +80,9 @@ const AddToolPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [ecosystems, setEcosystems] = useState<EcoSystem[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchCategoriesAndEcosystems = async () => {
@@ -219,14 +228,74 @@ const AddToolPage = () => {
 
   const noGithubRepo = watch("noGithubRepo");
 
+  const handleLogoChange = useCallback(
+    (file: File) => {
+      if (file) {
+        setLogoFile(file);
+        setValue("logo_image", file);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setLogoPreview(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    [setValue]
+  );
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith("image/")) {
+      handleLogoChange(file);
+      setValue("logo_image", file);
+    }
+  };
+
+  // Handle paste functionality
+  useEffect(() => {
+    const handlePaste = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+
+      for (const item of items) {
+        if (item.type.startsWith("image/")) {
+          const file = item.getAsFile();
+          if (file) {
+            handleLogoChange(file);
+            setValue("logo_image", file);
+          }
+          break;
+        }
+      }
+    };
+
+    document.addEventListener("paste", handlePaste);
+    return () => document.removeEventListener("paste", handlePaste);
+  }, [setValue, handleLogoChange]);
+
   const onSubmit = async (data: ToolFormData) => {
     if (!isAdmin) return;
     setIsSubmitting(true);
     try {
+      let logo_url = "";
+
+      // Upload logo if a file is selected
+      if (logoFile) {
+        const filename = `tool-logos/${Date.now()}_${data.name
+          .replace(/\s+/g, "-")
+          .toLowerCase()}`;
+        const storageRef = ref(storage, filename);
+        await uploadBytes(storageRef, logoFile);
+        logo_url = await getDownloadURL(storageRef);
+      }
+
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { noGithubRepo, ...toolDataWithoutNoGithubRepo } = data;
+      const { noGithubRepo, logo_image, ...restData } = data;
+
       const toolData: NewToolData = {
-        ...toolDataWithoutNoGithubRepo,
+        ...restData,
+        logo_url,
         category: doc(
           db,
           "categories",
@@ -248,6 +317,8 @@ const AddToolPage = () => {
       });
       reset();
       setNewBadge("");
+      setLogoFile(null);
+      setLogoPreview(null);
     } catch (error) {
       toast({
         title: "Error",
@@ -394,10 +465,64 @@ const AddToolPage = () => {
           </div>
         )}
         <div>
-          <Label htmlFor="logo_url">Logo URL</Label>
-          <Input {...register("logo_url")} placeholder="Logo URL" />
-          {errors.logo_url && (
-            <p className="text-red-500">{errors.logo_url.message}</p>
+          <Label htmlFor="logo_url">Logo Upload</Label>
+          <div
+            className="border-2 border-dashed rounded-lg p-4 hover:border-primary cursor-pointer"
+            onDrop={handleDrop}
+            onDragOver={(e) => e.preventDefault()}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  handleLogoChange(file);
+                  setValue("logo_image", file);
+                }
+              }}
+            />
+
+            {logoPreview ? (
+              <div className="flex items-center gap-4">
+                <img
+                  src={logoPreview}
+                  alt="Logo preview"
+                  className="w-16 h-16 object-contain"
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLogoFile(null);
+                    setLogoPreview(null);
+                    setValue("logo_image", null);
+                  }}
+                >
+                  Remove
+                </Button>
+              </div>
+            ) : (
+              <div className="text-center">
+                <p>
+                  Drag and drop an image here, click to browse, or paste from
+                  clipboard
+                </p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Supported formats: PNG, JPG, GIF
+                </p>
+              </div>
+            )}
+          </div>
+          {errors.logo_image && (
+            <p className="text-red-500">
+              {errors.logo_image?.message?.toString()}
+            </p>
           )}
         </div>
         <div className="flex flex-col space-y-4">
