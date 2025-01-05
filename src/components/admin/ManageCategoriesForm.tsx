@@ -178,11 +178,13 @@ const ManageCategoriesForm = () => {
           <SelectValue placeholder="Select a category to edit" />
         </SelectTrigger>
         <SelectContent>
-          {categories.map((category) => (
-            <SelectItem key={category.id} value={category.id}>
-              {category.name}
-            </SelectItem>
-          ))}
+          {categories
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((category) => (
+              <SelectItem key={category.id} value={category.id}>
+                {category.name}
+              </SelectItem>
+            ))}
         </SelectContent>
       </Select>
 

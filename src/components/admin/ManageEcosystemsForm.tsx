@@ -183,11 +183,13 @@ const ManageEcosystemsForm = () => {
           <SelectValue placeholder="Select an ecosystem to edit" />
         </SelectTrigger>
         <SelectContent>
-          {ecosystems.map((ecosystem) => (
-            <SelectItem key={ecosystem.id} value={ecosystem.id}>
-              {ecosystem.name}
-            </SelectItem>
-          ))}
+          {ecosystems
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((ecosystem) => (
+              <SelectItem key={ecosystem.id} value={ecosystem.id}>
+                {ecosystem.name}
+              </SelectItem>
+            ))}
         </SelectContent>
       </Select>
 

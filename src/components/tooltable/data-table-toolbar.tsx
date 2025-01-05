@@ -24,15 +24,19 @@ export function DataTableToolbar<TData>({
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
-  const categoryOptions = categories.map((category) => ({
-    label: category.name,
-    value: category.id,
-  }));
+  const categoryOptions = categories
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((category) => ({
+      label: category.name,
+      value: category.id,
+    }));
 
-  const ecosystemOptions = ecosystems.map((ecosystem) => ({
-    label: ecosystem.name,
-    value: ecosystem.id,
-  }));
+  const ecosystemOptions = ecosystems
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((ecosystem) => ({
+      label: ecosystem.name,
+      value: ecosystem.id,
+    }));
 
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between pt-1">
