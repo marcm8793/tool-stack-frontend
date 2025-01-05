@@ -90,20 +90,24 @@ const AddToolPage = () => {
       const ecosystemsSnapshot = await getDocs(collection(db, "ecosystems"));
 
       setCategories(
-        categoriesSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          created_at: doc.data().created_at,
-          updated_at: doc.data().updated_at,
-        }))
+        categoriesSnapshot.docs
+          .sort((a, b) => a.data().name.localeCompare(b.data().name))
+          .map((doc) => ({
+            id: doc.id,
+            name: doc.data().name,
+            created_at: doc.data().created_at,
+            updated_at: doc.data().updated_at,
+          }))
       );
       setEcosystems(
-        ecosystemsSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          created_at: doc.data().created_at,
-          updated_at: doc.data().updated_at,
-        }))
+        ecosystemsSnapshot.docs
+          .sort((a, b) => a.data().name.localeCompare(b.data().name))
+          .map((doc) => ({
+            id: doc.id,
+            name: doc.data().name,
+            created_at: doc.data().created_at,
+            updated_at: doc.data().updated_at,
+          }))
       );
     };
 
