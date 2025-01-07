@@ -13,6 +13,7 @@ const Header = () => {
         >
           ToolStack
         </Link>
+        {/* <ChatBot /> */}
         <Link to="/" className="block md:hidden">
           <img src="/ToolStack.png" alt="ToolStack" width={48} height={48} />
         </Link>
