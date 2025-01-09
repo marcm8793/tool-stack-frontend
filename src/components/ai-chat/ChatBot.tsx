@@ -5,10 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/hooks/useAuth";
 import { getFunctions, httpsCallable } from "firebase/functions";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  isStreaming?: boolean;
 }
 
 export const ChatBot = () => {
@@ -44,10 +46,27 @@ export const ChatBot = () => {
         toolQuery: userMessage,
       });
 
-      const response = result.data as { message: string };
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: response.message },
+        { role: "assistant", content: "", isStreaming: true },
+      ]);
+
+      const response = result.data as { message: string };
+      const textToStream = response.message;
+      let streamedContent = "";
+
+      for (let i = 0; i < textToStream.length; i++) {
+        streamedContent += textToStream[i];
+        setMessages((prev) => [
+          ...prev.slice(0, -1),
+          { role: "assistant", content: streamedContent, isStreaming: true },
+        ]);
+        await new Promise((resolve) => setTimeout(resolve, 20));
+      }
+
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { role: "assistant", content: textToStream },
       ]);
     } catch (error) {
       console.error("Error:", error);
@@ -113,9 +132,9 @@ export const ChatBot = () => {
                         message.role === "user"
                           ? "bg-blue-500 text-white"
                           : "bg-gray-100 dark:bg-gray-700"
-                      }`}
+                      } prose dark:prose-invert max-w-none`}
                     >
-                      {message.content}
+                      <ReactMarkdown>{message.content}</ReactMarkdown>
                     </div>
                   </div>
                 </div>

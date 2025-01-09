@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import MainNav from "./MainNav";
 import MobileNav from "./MobileNav";
 import SearchBar from "../SearchBar";
+// import { ChatBot } from "../ai-chat/ChatBot";
 
 const Header = () => {
   return (
