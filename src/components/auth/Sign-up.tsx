@@ -14,22 +14,31 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
+import { signUpSchema } from "@/lib/validation";
+import { SignUpFormData } from "@/lib/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 type SignUpFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function SignUpForm({ ...props }: SignUpFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
+  });
+
+  async function onSubmit(data: SignUpFormData) {
     setIsLoading(true);
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
       toast({
         title: "Success",
         description: "You have successfully signed up.",
@@ -98,7 +107,7 @@ export function SignUpForm({ ...props }: SignUpFormProps) {
               Enter your email below to create your account
             </p>
           </div>
-          <form onSubmit={onSubmit} className="grid gap-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -108,11 +117,12 @@ export function SignUpForm({ ...props }: SignUpFormProps) {
                 autoCapitalize="none"
                 autoComplete="email"
                 autoCorrect="off"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email")}
                 disabled={isLoading}
               />
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email.message}</p>
+              )}
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
@@ -123,11 +133,14 @@ export function SignUpForm({ ...props }: SignUpFormProps) {
                 autoCapitalize="none"
                 autoComplete="new-password"
                 autoCorrect="off"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password")}
                 disabled={isLoading}
               />
+              {errors.password && (
+                <p className="text-sm text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? (
