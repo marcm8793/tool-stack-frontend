@@ -62,7 +62,7 @@ export const ChatBot = () => {
           ...prev.slice(0, -1),
           { role: "assistant", content: streamedContent, isStreaming: true },
         ]);
-        await new Promise((resolve) => setTimeout(resolve, 20));
+        await new Promise((resolve) => setTimeout(resolve, 10));
       }
 
       setMessages((prev) => [
@@ -102,7 +102,7 @@ export const ChatBot = () => {
             className="fixed z-50 bottom-20 right-4 w-96 h-[600px] bg-gray-100 dark:bg-gray-800 rounded-lg shadow-xl flex flex-col"
           >
             <div className="p-4 border-b dark:border-gray-700">
-              <h2 className="text-lg font-semibold">ToolStack Assistant</h2>
+              <h2 className="text-lg font-semibold">ToolStack AI</h2>
             </div>
 
             {!user && (
@@ -138,18 +138,18 @@ export const ChatBot = () => {
                           : "flex-row"
                       }`}
                     >
-                      <Avatar className="w-8 h-8">
+                      <Avatar className="w-8 h-8 rounded-full flex items-center justify-center m-2">
                         {message.role === "user" ? (
                           <AvatarImage src={user?.photoURL || ""} />
                         ) : (
                           <AvatarImage src="/bot-avatar.png" />
                         )}
                         <AvatarFallback>
-                          {message.role === "user" ? "U" : "A"}
+                          {message.role === "user" ? "👤" : "🤖"}
                         </AvatarFallback>
                       </Avatar>
                       <div
-                        className={`rounded-lg p-3 ${
+                        className={`p-3 rounded-lg ${
                           message.role === "user"
                             ? "bg-blue-500 text-white"
                             : "bg-gray-100 dark:bg-gray-700"
@@ -165,7 +165,7 @@ export const ChatBot = () => {
                     <div className="flex items-center space-x-2">
                       <Avatar className="w-8 h-8">
                         <AvatarImage src="/bot-avatar.png" />
-                        <AvatarFallback>A</AvatarFallback>
+                        <AvatarFallback>🤖</AvatarFallback>
                       </Avatar>
                       <Loader2 className="w-4 h-4 animate-spin" />
                     </div>
