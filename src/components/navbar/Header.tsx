@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import MainNav from "./MainNav";
 import MobileNav from "./MobileNav";
 import SearchBar from "../SearchBar";
-// import { ChatBot } from "../ai-chat/ChatBot";
+import { ChatBot } from "../ai-chat/ChatBot";
 
 const Header = () => {
   return (
@@ -14,7 +14,7 @@ const Header = () => {
         >
           ToolStack
         </Link>
-        {/* <ChatBot /> */}
+        <ChatBot />
         <Link to="/" className="block md:hidden">
           <img src="/ToolStack.png" alt="ToolStack" width={48} height={48} />
         </Link>
